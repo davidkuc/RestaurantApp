@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp.Repositories
 {
-    public interface IReadRepository<T> where T : class, IEntity
+    public interface IReadRepository<out T> where T : class, IEntity
     {
         IEnumerable<T> GetAll();
 

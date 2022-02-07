@@ -9,10 +9,10 @@ namespace RestaurantApp.Entities
     public class Supplier : EntityBase
     {
 
-        string? Firm { get; set; }
-        string? SupplyCategory { get; set; }
+        public string? Firm { get; set; }
+        public string? SupplyCategory { get; set; }
 
-        public override string ToString() => $"Id : {Id}, Firm: {Firm}, Supply Category: {SupplyCategory} ";
+        public ICollection<Supply> Supplies { get; set; }
 
     }
 }

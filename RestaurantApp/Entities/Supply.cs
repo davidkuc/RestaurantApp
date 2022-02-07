@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp.Entities
 {
-    public class SupplyBatch : EntityBase
+    public class Supply : EntityBase
     {
 
-        string? Name { get; set; }
-        DateOnly? ExpirationDate { get; set; }
-        DateOnly? PurchaseDate { get; set; }
-        string? Category { get; set; }
-        int? Quantity { get; set; }
+        public string? Name { get; set; }
+        public string? ExpirationDate { get; set; }
+        public string? PurchaseDate { get; set; }
+        public string? Category { get; set; }
+        public int? Quantity { get; set; }
 
-        public override string ToString() => $"Id : {Id}, Name: {Name}, Category: {Category}";
-        
-            
-        
-          
-       
+        public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
+
+
 
 
     }
