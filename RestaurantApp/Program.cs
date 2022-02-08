@@ -7,12 +7,13 @@ var employeeRepository = new SqlRepository<Employee>(new RestaurantAppDbContext(
 var supplierRepository = new SqlRepository<Supplier>(new RestaurantAppDbContext());
 var supplyRepository = new SqlRepository<Supply>(new RestaurantAppDbContext());
 
-
-
+#region UI
 void MainMenuUI()
 {
     Console.WriteLine("Hello!");
+    Console.WriteLine();
     Console.WriteLine("What do you wish to do?");
+    Console.WriteLine();
     Console.WriteLine("1 - Add entity");
     Console.WriteLine("2 - Modify entity data");
     Console.WriteLine("3 - Display entity data");
@@ -44,6 +45,109 @@ void MainMenuUI()
 
 }
 
+void ModifyEntityUI()
+{
+    while (true)
+    {
+        Console.WriteLine();
+        Console.WriteLine("---   Modify entity   ---");
+        Console.WriteLine();
+        Console.WriteLine("What entity do you wish to modify?");
+        Console.WriteLine("1 - Employee");
+        Console.WriteLine("2 - Supplier");
+        Console.WriteLine("3 - Supply");
+        Console.WriteLine("4 - exit");
+
+        var modifyEntityMenuChoice = Console.ReadLine();
+
+        if (modifyEntityMenuChoice == "4")
+        {
+            return;
+        }
+        else
+        {
+            switch (modifyEntityMenuChoice)
+            {
+                case "1":
+                    ModifyEmployeeUI();
+                    break;
+                case "2":
+                    ModifySupplierUI();
+                    break;
+                case "3":
+                    ModifySupplyUI();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+}
+
+void ModifyEmployeeUI()
+{
+    Console.WriteLine();
+    Console.WriteLine("---   Modify employee   ---");
+    Console.WriteLine();
+    while (true)
+    {
+        Console.WriteLine("Choose employee by Id");
+        Console.WriteLine();
+        DisplayEmployees(employeeRepository);
+        Console.WriteLine();
+        var chosenEmployeeId = Int32.Parse(Console.ReadLine());
+        var chosenEmployee = employeeRepository.GetById(chosenEmployeeId);
+        Console.WriteLine();
+        Console.WriteLine("What data do you wish to modify?");
+        Console.WriteLine("1 - First name");
+        Console.WriteLine("2 - Last name");
+        Console.WriteLine("3 - Role");
+        Console.WriteLine("4 - exit");
+        Console.WriteLine();
+
+        var modifyEmployeeMenuChoice = Console.ReadLine();
+
+        if (modifyEmployeeMenuChoice == "4")
+        {
+            return;
+        }
+        else
+        {
+            switch (modifyEmployeeMenuChoice)
+            {
+                case "1":
+                    Console.WriteLine("Enter new employee first name");
+                    var newName = Console.ReadLine();
+                    chosenEmployee.FirstName = newName;
+                    break;
+                case "2":
+                    ModifySupplierUI();
+                    break;
+                case "3":
+                    ModifySupplyUI();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    employeeRepository.Save();
+
+}
+
+static void DisplayEmployees(IRepository<Employee> employeeRepository)
+{
+    var employeeList = employeeRepository.GetAll();
+    Console.WriteLine("                 Employee list                  ");
+    Console.WriteLine("   Id -- First name -- Last name -- Role   ");
+    foreach (var employee in employeeList)
+    {
+        Console.WriteLine($"   {employee.Id} -- {employee.FirstName} -- {employee.LastName} -- {employee.Role}  ");
+    }
+}
+
+#region AddEntityUI
 void AddEntityUI()
 {
     Console.WriteLine();
@@ -67,7 +171,7 @@ void AddEntityUI()
         switch (addEntityMenuChoice)
         {
             case "1":
-               var employeesBatch = AddEmployeeUI();
+                var employeesBatch = AddEmployeeUI();
                 employeeRepository.AddBatch<Employee>(employeesBatch.ToArray());
                 break;
             case "2":
@@ -101,7 +205,7 @@ List<Supply> AddSupplyUI()
         Console.WriteLine("Enter purchase date (DD/MM/YYYY)");
         var purchaseDate = Console.ReadLine();
         Console.WriteLine("Enter expiration date (DD/MM/YYYY)");
-        var expirationDate = Console.ReadLine();       
+        var expirationDate = Console.ReadLine();
         var newSupply = new Supply
         {
             Name = supplyName,
@@ -146,9 +250,9 @@ List<Supplier> AddSupplierUI()
         var newSupplier = new Supplier
         {
             Firm = firmName,
-            SupplyCategory = supplyCategory,          
+            SupplyCategory = supplyCategory,
         };
-       suppliersToAdd.Add(newSupplier);
+        suppliersToAdd.Add(newSupplier);
         Console.WriteLine();
         Console.WriteLine("1 - Add another supplier");
         Console.WriteLine("2 - exit");
@@ -205,3 +309,8 @@ List<Employee> AddEmployeeUI()
     }
     return employeesToAdd;
 }
+#endregion
+
+
+#endregion
+
