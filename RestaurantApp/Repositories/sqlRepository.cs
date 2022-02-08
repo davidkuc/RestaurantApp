@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp.Repositories
 {
-    public class sqlRepository<T> : IRepository<T> where T : class, IEntity
+    public class SqlRepository<T> : IRepository<T> where T : class, IEntity
     {
         private readonly DbSet<T> _dbSet;
         private readonly DbContext _dbContext;
 
-        public sqlRepository(DbContext dbContext)
+        public SqlRepository(DbContext dbContext)
         {
 
             _dbContext = dbContext;

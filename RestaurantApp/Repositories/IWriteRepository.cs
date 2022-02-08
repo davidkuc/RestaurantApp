@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp.Repositories
 {
-    public interface IWriteRepository<in T> where T : class, IEntity
+    public interface IWriteRepository<T> where T : class, IEntity
     {
 
         void Add(T item);
