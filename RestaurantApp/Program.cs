@@ -3,9 +3,12 @@ using RestaurantApp.Entities;
 using RestaurantApp.Repositories;
 using RestaurantApp.Repositories.Extensions;
 
-var employeeRepository = new SqlRepository<Employee>(new RestaurantAppDbContext());
+var itemAdded = new ItemAdded<Employee>(OnEmployeeAddedToDB);
+var employeeRepository = new SqlRepository<Employee>(new RestaurantAppDbContext(), itemAdded);
 var supplierRepository = new SqlRepository<Supplier>(new RestaurantAppDbContext());
 var supplyRepository = new SqlRepository<Supply>(new RestaurantAppDbContext());
+
+MainMenuUI();
 
 #region UI
 void MainMenuUI()
@@ -48,7 +51,7 @@ void MainMenuUI()
 void DisplayEntityDataUI()
 {
     Console.WriteLine();
-    Console.WriteLine("---   Modify entity   ---");
+    Console.WriteLine("---   Display entity data  ---");
     Console.WriteLine();
     while (true)
     {
@@ -537,6 +540,15 @@ List<Employee> AddEmployeeUI()
 }
 #endregion
 
+
+#endregion
+
+
+#region EventMethods
+ void OnEmployeeAddedToDB(Employee item)
+{
+    Console.WriteLine("Employee added");
+}
 
 #endregion
 
