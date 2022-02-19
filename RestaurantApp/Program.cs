@@ -1,12 +1,19 @@
+using RestaurantApp.Const;
 using RestaurantApp.Data;
 using RestaurantApp.Entities;
 using RestaurantApp.Repositories;
 using RestaurantApp.Repositories.Extensions;
 
-var itemAdded = new ItemAdded<Employee>(OnEmployeeAddedToDB);
-var employeeRepository = new SqlRepository<Employee>(new RestaurantAppDbContext(), itemAdded);
+
+var employeeRepository = new SqlRepository<Employee>(new RestaurantAppDbContext());
 var supplierRepository = new SqlRepository<Supplier>(new RestaurantAppDbContext());
 var supplyRepository = new SqlRepository<Supply>(new RestaurantAppDbContext());
+employeeRepository.ItemAdded += OnEmployeeAdded;
+employeeRepository.ItemRemoved += OnEmployeeRemoved;
+supplierRepository.ItemAdded += OnSupplierAdded;
+supplierRepository.ItemRemoved += OnSupplierRemoved;
+supplyRepository.ItemAdded += OnSupplyAdded;
+supplyRepository.ItemRemoved += OnSupplyRemoved;
 
 MainMenuUI();
 
@@ -262,7 +269,7 @@ void ModifySupplierUI()
                 case "1":
                     Console.WriteLine("Enter new supplier firm name");
                     var newFirmName = Console.ReadLine();
-                    chosenSupplier.Firm = newFirmName;
+                    chosenSupplier.Name = newFirmName;
                     break;
                 case "2":
                     Console.WriteLine("Enter new supply category");
@@ -351,7 +358,7 @@ static void DisplaySuppliers(IRepository<Supplier> supplierRepository)
     Console.WriteLine("   Id -- Firm name -- Supply category   ");
     foreach (var supplier in supplierList)
     {
-        Console.WriteLine($"   {supplier.Id} -- {supplier.Firm} -- {supplier.SupplyCategory}  ");
+        Console.WriteLine($"   {supplier.Id} -- {supplier.Name} -- {supplier.SupplyCategory}  ");
     }
 }
 
@@ -478,7 +485,7 @@ List<Supplier> AddSupplierUI()
         var role = Console.ReadLine();
         var newSupplier = new Supplier
         {
-            Firm = firmName,
+            Name = firmName,
             SupplyCategory = supplyCategory,
         };
         suppliersToAdd.Add(newSupplier);
@@ -544,11 +551,51 @@ List<Employee> AddEmployeeUI()
 #endregion
 
 
-#region EventMethods
- void OnEmployeeAddedToDB(Employee item)
+#region EventHandlerMethods
+static void OnEmployeeAdded(object? sender, Employee item)
 {
-    Console.WriteLine("Employee added");
+    Console.WriteLine($"Employee {item.FirstName} {item.LastName} added by {nameof(employeeRepository)}");
+}
+
+static void OnEmployeeRemoved(object? sender, Employee item)
+{
+    Console.WriteLine($"Employee {item.FirstName} {item.LastName} removed by {nameof(employeeRepository)}");
+}
+
+static void OnSupplierAdded(object? sender, Supplier item)
+{
+    Console.WriteLine($"Supplier {item.Name} added by {nameof(supplierRepository)}");
+}
+
+static void OnSupplierRemoved(object? sender, Supplier item)
+{
+    Console.WriteLine($"SupplierEmployee {item.Name} removed by {nameof(supplierRepository)}");
+}
+
+static void OnSupplyAdded(object? sender, Supply item)
+{
+    Console.WriteLine($"Supply {item.Name} {item.Category} added by {nameof(supplyRepository)}");
+}
+
+static void OnSupplyRemoved(object? sender, Supply item)
+{
+    Console.WriteLine($"Supply {item.Name} {item.Category} removed by {nameof(supplyRepository)}");
 }
 
 #endregion
 
+#region Audit
+static string WriteToAudit_AddedItems<T>(IEntity[] items)
+{
+    using (var auditWriter = File.AppendText($"{Const.appDirectory}/audit.txt"))
+    {
+foreach (var item in items)
+    {
+            auditWriter.WriteLine($"[{DateTime.Now}] Item added: {item.GetType().Name} - {item.}");
+    }
+
+    }
+    
+
+}
+#endregion

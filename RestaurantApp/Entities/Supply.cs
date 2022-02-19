@@ -9,7 +9,7 @@ namespace RestaurantApp.Entities
     public class Supply : EntityBase
     {
 
-        public string? Name { get; set; }
+     
         public string ExpirationDate { get; set; }
         public string PurchaseDate { get; set; }
         public string? Category { get; set; }

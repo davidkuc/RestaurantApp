@@ -11,8 +11,8 @@ namespace RestaurantApp.Repositories.Extensions
 {
     public static class RepositoryExtensions
     {
-        
-        public static void AddBatch<T>(this IRepository<T> repository, T[] items)
+       
+        public static T[] AddBatch<T>(this IRepository<T> repository, T[] items)
      where T : class, IEntity
         {
             foreach (var item in items)
@@ -20,9 +20,10 @@ namespace RestaurantApp.Repositories.Extensions
                 repository.Add(item);
             }
             repository.Save();
+            return items;
         }
 
-        public static void DeleteBatch<T>(this IRepository<T> repository, T[] items)
+        public static T[] DeleteBatch<T>(this IRepository<T> repository, T[] items)
        where T : class, IEntity
         {
             foreach (var item in items)
@@ -30,8 +31,7 @@ namespace RestaurantApp.Repositories.Extensions
                 repository.Remove(item);
             }
             repository.Save();
-        }
-
-      
+            return items;
+        }  
     }
 }
