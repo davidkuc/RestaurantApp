@@ -9,10 +9,10 @@ namespace RestaurantApp.Entities
     public class Supplier : EntityBase
     {
 
-     
+        public string Name { get; set; }
         public string SupplyCategory { get; set; }
 
-        public ICollection<Supply> Supplies { get; set; }
+        public ICollection<Supply>? Supplies { get; set; }
 
     }
 }

@@ -40,7 +40,7 @@ namespace RestaurantApp.Repositories
         {
 
             _dbSet.Add(item);
-            ItemAdded.Invoke(this, item);
+            ItemAdded?.Invoke(this, item);
            
 
         }
@@ -48,7 +48,7 @@ namespace RestaurantApp.Repositories
         {
 
             _dbSet.Remove(item);
-            ItemRemoved.Invoke(this, item);
+            ItemRemoved?.Invoke(this, item);
 
         }
         public void Save()
@@ -57,6 +57,13 @@ namespace RestaurantApp.Repositories
             _dbContext.SaveChanges();
           
 
+        }
+
+        public void Update(T itemChanges)
+        {
+            var item = _dbSet.Attach(itemChanges);
+            item.State = EntityState.Modified;
+            Save();
         }
 
         public IEnumerable<T> GetAll()

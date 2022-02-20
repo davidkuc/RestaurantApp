@@ -14,6 +14,8 @@ namespace RestaurantApp.Repositories
         void Remove(T item);
 
         void Save();
+
+        void Update(T item);
     }
 }
 
