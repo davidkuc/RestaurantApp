@@ -18,5 +18,24 @@ namespace RestaurantApp.Entities
        
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
+
+        public ICollection<Dish>? Dishes { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine();
+            sb.AppendLine($" {this.GetType().Name}");
+            sb.AppendLine($" {Name} ID: {Id}");
+            sb.AppendLine($" Expiration Date: {ExpirationDate}");
+            sb.AppendLine($" Purchase Date: {PurchaseDate}");
+            sb.AppendLine($" Category: {Category}");
+            sb.AppendLine($" Quantity: {Quantity}");
+            sb.AppendLine($" Supplier Id: {SupplierId}");
+            sb.AppendLine();
+
+            return sb.ToString();
+        }
     }
 }

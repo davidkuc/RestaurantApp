@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantApp.Audit;
 using RestaurantApp.Const;
@@ -10,8 +11,11 @@ using RestaurantApp.Repositories.Extensions;
 var services = new ServiceCollection();
 services.AddSingleton<IApplication, Application>();
 services.AddSingleton<IRepository<Employee>, SqlRepository<Employee>>();
-//services.AddSingleton<IRepository<Supplier>, SqlRepository<Supplier>>();
-//services.AddSingleton<IRepository<Supply>, SqlRepository<Supply>>();
+services.AddSingleton<IRepository<Supplier>, SqlRepository<Supplier>>();
+services.AddSingleton<IRepository<Supply>, SqlRepository<Supply>>();
+services.AddSingleton<IRepository<Dish>, SqlRepository<Dish>>();
+services.AddSingleton<IRepository<Order>, SqlRepository<Order>>();
+services.AddDbContext<DbContext, RestaurantAppDbContext>();
 
 var serviceProvider = services.BuildServiceProvider();
 var app = serviceProvider.GetService<IApplication>()!;

@@ -22,7 +22,16 @@ namespace RestaurantApp.Data
 
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=EFCore_CodeFirst_RestaurantApp;" +
     "Trusted_Connection = True;");
-        }           
+
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Dish>().Property(p => p.PricePerDish).HasColumnType("smallmoney");
+            modelBuilder.Entity<Dish>().Property(p => p.TotalSales).HasColumnType("money");
+            modelBuilder.Entity<Order>().Property(p => p.OrderValue).HasColumnType("smallmoney");
+        }
     }
 }
 

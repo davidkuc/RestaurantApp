@@ -14,5 +14,17 @@ namespace RestaurantApp.Entities
 
         public ICollection<Supply>? Supplies { get; set; }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine();
+            sb.AppendLine($" {this.GetType().Name}");
+            sb.AppendLine($" {Name} ID: {Id}");
+            sb.AppendLine($" Supply Category: {SupplyCategory}");         
+            sb.AppendLine();
+
+            return sb.ToString();
+        }
     }
 }
