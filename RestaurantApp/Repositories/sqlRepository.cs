@@ -70,5 +70,7 @@ namespace RestaurantApp.Repositories
         {
             return _dbSet.ToList();
         }
+
+        
     }
 }
