@@ -8,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace RestaurantApp.Repositories
 {
+
+  
+
     public class SqlRepository<T> : IRepository<T> where T : class, IEntity, new()
     {
+       
+
         private readonly DbSet<T> _dbSet;
         private readonly DbContext _dbContext;
 
@@ -18,7 +23,11 @@ namespace RestaurantApp.Repositories
 
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
+            
         }
+
+        public event EventHandler<T>? ItemAdded;
+        public event EventHandler<T>? ItemRemoved;
 
         public T? GetById(int id)
         {
@@ -31,24 +40,37 @@ namespace RestaurantApp.Repositories
         {
 
             _dbSet.Add(item);
+            ItemAdded?.Invoke(this, item);
+           
 
         }
         public void Remove(T item)
         {
 
             _dbSet.Remove(item);
+            ItemRemoved?.Invoke(this, item);
 
         }
         public void Save()
         {
 
             _dbContext.SaveChanges();
+          
 
+        }
+
+        public void Update(T itemChanges)
+        {
+            var item = _dbSet.Attach(itemChanges);
+            item.State = EntityState.Modified;
+            Save();
         }
 
         public IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
         }
+
+        
     }
 }

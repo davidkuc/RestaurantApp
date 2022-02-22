@@ -8,7 +8,6 @@ namespace RestaurantApp.Entities
 {
     public interface IEntity
     {
-
-        public int Id { get; set; }
+        public int Id { get; }
     }
 }

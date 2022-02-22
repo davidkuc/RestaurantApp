@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,22 @@ namespace RestaurantApp.Entities
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
         public string? Role { get; set; }
 
+        public ICollection<Order>? Orders { get; set; }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine();
+            sb.AppendLine($" {this.GetType().Name}");
+            sb.AppendLine($" {FirstName} {LastName} ID: {Id}");
+            sb.AppendLine($" Role: {Role}");
+            sb.AppendLine();
+
+            return sb.ToString();
+        }
 
     }
 }
