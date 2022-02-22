@@ -12,10 +12,8 @@ namespace RestaurantApp.Entities
         public string Name { get; set; }
         public DateOnly? ExpirationDate { get; set; }
         public DateOnly? PurchaseDate { get; set; }
-        public string? Category { get; set; }
-        public int Quantity { get; set; }
-
-       
+        public SupplyCategories? Category { get; set; }
+        public int? Quantity { get; set; }     
         public int SupplierId { get; set; }
         public Supplier Supplier { get; set; }
 

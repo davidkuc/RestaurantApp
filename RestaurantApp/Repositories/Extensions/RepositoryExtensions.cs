@@ -32,6 +32,6 @@ namespace RestaurantApp.Repositories.Extensions
             }
             repository.Save();
             return items;
-        }  
+        }
     }
 }

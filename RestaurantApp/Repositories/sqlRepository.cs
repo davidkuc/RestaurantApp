@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace RestaurantApp.Repositories
 {
 
-  
+
 
     public class SqlRepository<T> : IRepository<T> where T : class, IEntity, new()
     {
        
 
-        private readonly DbSet<T> _dbSet;
-        private readonly DbContext _dbContext;
+        protected readonly DbSet<T> _dbSet;
+        protected readonly DbContext _dbContext;
 
         public SqlRepository(DbContext dbContext)
         {
@@ -29,14 +29,14 @@ namespace RestaurantApp.Repositories
         public event EventHandler<T>? ItemAdded;
         public event EventHandler<T>? ItemRemoved;
 
-        public T? GetById(int id)
+        public virtual T? GetById(int id)
         {
 
             return _dbSet.Find(id);
         }
 
 
-        public void Add(T item)
+        public virtual void Add(T item)
         {
 
             _dbSet.Add(item);
@@ -44,14 +44,14 @@ namespace RestaurantApp.Repositories
            
 
         }
-        public void Remove(T item)
+        public virtual void Remove(T item)
         {
 
             _dbSet.Remove(item);
             ItemRemoved?.Invoke(this, item);
 
         }
-        public void Save()
+        public virtual void Save()
         {
 
             _dbContext.SaveChanges();
@@ -59,14 +59,14 @@ namespace RestaurantApp.Repositories
 
         }
 
-        public void Update(T itemChanges)
+        public virtual void Update(T itemChanges)
         {
             var item = _dbSet.Attach(itemChanges);
             item.State = EntityState.Modified;
             Save();
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
         }
