@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace RestaurantApp.Entities.Extensions
 {
-    public static class EntityExtensions
+    public static class EntitiesExtensions
     {
 
         public static T? Copy<T>(this T itemToCopy) where T : IEntity

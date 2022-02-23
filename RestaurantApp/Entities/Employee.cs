@@ -12,7 +12,7 @@ namespace RestaurantApp.Entities
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string? Role { get; set; }
+        public EmployeeRoles? Role { get; set; }
 
         public ICollection<Order>? Orders { get; set; }
 
