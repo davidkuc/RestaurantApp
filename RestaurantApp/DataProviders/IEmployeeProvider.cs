@@ -7,7 +7,7 @@ namespace RestaurantApp.DataProviders
     {
         string GetEmployeeInfo(int id);
 
-        List<IGrouping<EmployeeRoles?, Employee>>? GroupByRole();
+        List<IGrouping<string?, Employee>>? GroupByRole();
 
         List<Employee>? SortByRole();
 

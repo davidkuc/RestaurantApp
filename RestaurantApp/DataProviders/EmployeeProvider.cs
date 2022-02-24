@@ -29,7 +29,7 @@ namespace RestaurantApp.DataProviders
                 .Orders?.ToList();
         }
 
-        public List<IGrouping<EmployeeRoles?, Employee>>? GroupByRole()
+        public List<IGrouping<string?, Employee>>? GroupByRole()
         {
             var employees = _employeeRepository.GetAll();
 

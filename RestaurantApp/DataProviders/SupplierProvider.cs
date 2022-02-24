@@ -23,7 +23,6 @@ namespace RestaurantApp.DataProviders
             var suppliers = _supplierRepository.GetAll();
             return suppliers.SingleOrDefault(p => p.Id == id)
                 .Supplies.ToList();
-
         }
 
         public List<IGrouping<SupplyCategories?,Supplier>> GroupByCategory()

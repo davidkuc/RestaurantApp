@@ -2,7 +2,7 @@
 
 namespace RestaurantApp.DataProviders
 {
-    public interface ISupplyProvider
+    public interface ISupplyProvider 
     {
         List<IGrouping<SupplyCategories?, Supply>>? GroupByCategory();
         List<IGrouping<int, Supply>>? GroupBySupplier();

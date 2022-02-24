@@ -6,7 +6,7 @@ namespace RestaurantApp.Data
    
         public static class RestAppDbCtxExtensions
         {
-            public static void MapModels(this RestaurantAppDbContext dbContext, ModelBuilder modelBuilder)
+            public static void MapModels(this DbContext dbContext, ModelBuilder modelBuilder)
             {
                 modelBuilder.Entity<Dish>()
                   .Property(p => p.Price)

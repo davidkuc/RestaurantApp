@@ -10,6 +10,8 @@ namespace RestaurantApp.Data
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<Supplier> Suppliers => Set<Supplier>();
         public DbSet<Supply> Supplies => Set<Supply>();
+        public DbSet<Dish> Dishes => Set<Dish>();
+        public DbSet<Order> Orders => Set<Order>();
 
         public RestaurantAppDbContext()
         {
