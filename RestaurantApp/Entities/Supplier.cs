@@ -10,7 +10,7 @@ namespace RestaurantApp.Entities
     {
 
         public string Name { get; set; }
-        public SupplyCategories? SupplyCategory { get; set; }
+        public string? SupplyCategory { get; set; }
 
         public ICollection<Supply>? Supplies { get; set; }
 
