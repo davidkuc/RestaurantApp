@@ -6,11 +6,13 @@ namespace RestaurantApp.DataProviders
     public class DishProvider : IDishProvider
     {
         private readonly IRepository<Dish> _dishRepository;
+        private readonly IRepository<Order> _orderRepository;
 
         public DishProvider(IRepository<Dish> dishRepository,
             IRepository<Order> orderRepository)
         {
             _dishRepository = dishRepository;
+            _orderRepository = orderRepository;
         }
         public List<Dish> DishesAboveValue(decimal minPrice)
         {
@@ -34,6 +36,15 @@ namespace RestaurantApp.DataProviders
         {
             var dishes = _dishRepository.GetAll();
             return dishes.Select(p => p).OrderByDescending(p => p.Price).ToList();
+        }
+
+        public List<IGrouping<Order, Dish>>? GetDishes()
+        {
+            var dishes = _dishRepository.GetAll();
+
+            return dishes.Select(p => p)
+                .Where(p => p.)
+                .ToList();
         }
 
         public string GetDishInfo(int id)

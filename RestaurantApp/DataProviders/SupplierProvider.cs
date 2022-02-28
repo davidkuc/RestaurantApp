@@ -5,9 +5,9 @@ namespace RestaurantApp.DataProviders
 {
     public class SupplierProvider : ISupplierProvider
     {
-        private readonly IRepository<Supplier> _supplierRepository;
+        private readonly IRepository<Order> _supplierRepository;
 
-        public SupplierProvider(IRepository<Supplier> supplierRepository)
+        public SupplierProvider(IRepository<Order> supplierRepository)
         {
             _supplierRepository = supplierRepository;
 
@@ -25,14 +25,14 @@ namespace RestaurantApp.DataProviders
                 .Supplies.ToList();
         }
 
-        public List<IGrouping<SupplyCategories?,Supplier>> GroupByCategory()
+        public List<IGrouping<SupplyCategories?,Order>> GroupByCategory()
         {
             var suppliers = _supplierRepository.GetAll();
             var result = suppliers.GroupBy(x => x.SupplyCategory).ToList();
             return result;
         }
 
-        public List<Supplier> SortByCategory()
+        public List<Order> SortByCategory()
         {
             var suppliers = _supplierRepository.GetAll();
             var result = suppliers.OrderBy(x => x.SupplyCategory).ToList();
