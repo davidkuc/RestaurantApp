@@ -12,11 +12,6 @@ namespace RestaurantApp.DataProviders
             _supplierRepository = supplierRepository;
 
         }
-        public string GetSupplierInfo(int id)
-        {
-            var supplier = _supplierRepository.GetById(id);
-            return supplier.ToString();
-        }
 
         public List<Supply>? GetSupplies(int id)
         {

@@ -10,6 +10,5 @@ namespace RestaurantApp.DataProviders
         List<Supply>? SortByExpirationDate();
         List<Supply>? SortByPurchaseDate();
         List<Supply>? SortByQuantity();
-        string GetSupplyInfo(int id);
     }
 }

@@ -12,8 +12,6 @@ namespace RestaurantApp.DataProviders
 
         List<Order>? OrdersBelowValue(decimal maxPrice);
 
-        string GetOrderInfo(int id);
-
         List<Order>? GetOrdersToGo();
 
         List<Order>? GetOrdersOnSite();

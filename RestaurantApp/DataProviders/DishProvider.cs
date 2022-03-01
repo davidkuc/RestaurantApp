@@ -47,12 +47,6 @@ namespace RestaurantApp.DataProviders
                 .ToList();
         }
 
-        public string GetDishInfo(int id)
-        {
-            var dishInfo = _dishRepository.GetById(id).ToString();          
-            return dishInfo;          
-        }
-
         public List<Supply>? GetDishIngredients(int id)
         {
             var dishes = _dishRepository.GetAll();

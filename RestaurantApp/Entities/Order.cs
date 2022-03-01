@@ -4,10 +4,10 @@ namespace RestaurantApp.Entities
 {
     public class Order : EntityBase
     {
-        public bool? Completed { get; set; }
+        public string? Status { get; set; }
         public bool? ToGo { get; set; }
         public DateTime OrderDateTime { get; set; }
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public Employee Employee { get; set; }
         public ICollection<Dish>? Dishes { get; set; }
         public decimal? OrderValue { get; set; }

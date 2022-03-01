@@ -12,12 +12,6 @@ namespace RestaurantApp.DataProviders
             _supplyRepository = supplyRepository;
         }
 
-        public string GetSupplyInfo(int id)
-        {
-            var supply = _supplyRepository.GetById(id);
-            return supply.ToString();
-        }
-
         public List<IGrouping<SupplyCategories?, Supply>>? GroupByCategory()
         {
             var supplies = _supplyRepository.GetAll();
