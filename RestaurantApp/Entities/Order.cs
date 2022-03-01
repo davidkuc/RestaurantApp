@@ -20,7 +20,7 @@ namespace RestaurantApp.Entities
             sb.AppendLine($" {this.GetType().Name}");
             sb.AppendLine($" Order ID: {Id}");
             sb.AppendLine($" Order DateTime = {OrderDateTime}");
-            sb.AppendLine($" Employee ID = {EmployeeId}");
+            sb.AppendLine($" Employee ID = {EmployeeId ?? 99999999}");
             sb.AppendLine();
 
             return sb.ToString();

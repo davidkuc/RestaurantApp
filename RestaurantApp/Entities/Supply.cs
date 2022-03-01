@@ -14,7 +14,7 @@ namespace RestaurantApp.Entities
         public DateTime? PurchaseDate { get; set; }
         public string? Category { get; set; }
         public int? Quantity { get; set; }     
-        public int SupplierId { get; set; }
+        public int SupplierID { get; set; }
         public Order Supplier { get; set; }
 
         public ICollection<Dish>? Dishes { get; set; }
@@ -30,7 +30,7 @@ namespace RestaurantApp.Entities
             sb.AppendLine($" Purchase Date: {PurchaseDate}");
             sb.AppendLine($" Category: {Category}");
             sb.AppendLine($" Quantity: {Quantity}");
-            sb.AppendLine($" Supplier Id: {SupplierId}");
+            sb.AppendLine($" Supplier Id: {SupplierID}");
             sb.AppendLine();
 
             return sb.ToString();
