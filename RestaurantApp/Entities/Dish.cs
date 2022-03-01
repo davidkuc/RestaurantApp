@@ -17,7 +17,7 @@ namespace RestaurantApp.Entities
             sb.AppendLine();
             sb.AppendLine($" {this.GetType().Name}");
             sb.AppendLine($" {Name} ID: {Id}");
-            sb.AppendLine($" PricePerDish: {Price}");
+            sb.AppendLine($" Price: {Price}");
             sb.AppendLine();
 
             return sb.ToString();
