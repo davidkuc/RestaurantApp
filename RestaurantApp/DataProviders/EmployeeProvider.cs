@@ -14,13 +14,6 @@ namespace RestaurantApp.DataProviders
 
         }
 
-
-        public string GetEmployeeInfo(int id)
-        {
-            var employee = _employeeRepository.GetById(id);
-            return employee.ToString();
-        }
-
         public List<Order>? GetEmployeeOrders(int? id)
         {
             var employees = _employeeRepository.GetAll();
@@ -29,7 +22,7 @@ namespace RestaurantApp.DataProviders
                 .Orders?.ToList();
         }
 
-        public List<IGrouping<EmployeeRoles?, Employee>>? GroupByRole()
+        public List<IGrouping<string?, Employee>>? GroupByRole()
         {
             var employees = _employeeRepository.GetAll();
 

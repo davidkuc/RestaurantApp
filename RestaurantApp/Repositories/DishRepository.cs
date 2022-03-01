@@ -13,6 +13,7 @@ namespace RestaurantApp.Repositories
         {
             return _dbSet
                 .Include(p => p.Supplies)
+                .Include(p => p.Orders)
                 .ToList();
         }
     }

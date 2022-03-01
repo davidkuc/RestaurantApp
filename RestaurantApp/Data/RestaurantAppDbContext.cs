@@ -8,8 +8,10 @@ namespace RestaurantApp.Data
     public partial class RestaurantAppDbContext : DbContext
     {
         public DbSet<Employee> Employees => Set<Employee>();
-        public DbSet<Supplier> Suppliers => Set<Supplier>();
+        public DbSet<Order> Suppliers => Set<Order>();
         public DbSet<Supply> Supplies => Set<Supply>();
+        public DbSet<Dish> Dishes => Set<Dish>();
+        public DbSet<Order> Orders => Set<Order>();
 
         public RestaurantAppDbContext()
         {

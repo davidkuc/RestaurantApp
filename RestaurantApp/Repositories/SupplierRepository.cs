@@ -3,13 +3,13 @@ using RestaurantApp.Entities;
 
 namespace RestaurantApp.Repositories
 {
-    public class SupplierRepository : SqlRepository<Supplier>
+    public class SupplierRepository : SqlRepository<Order>
     {
         public SupplierRepository(DbContext dbContext) : base(dbContext)
         {
         }
 
-        public override IEnumerable<Supplier> GetAll()
+        public override IEnumerable<Order> GetAll()
         {
             return _dbSet.Include(p => p.Supplies)
                 .ToList();

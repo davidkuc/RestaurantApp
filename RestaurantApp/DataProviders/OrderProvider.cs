@@ -15,12 +15,6 @@ namespace RestaurantApp.DataProviders
 
         }
 
-        public string GetOrderInfo(int id)
-        {
-            var order = _orderRepository.GetById(id);
-            return order.ToString();
-        }
-
         public List<Order> GetOrdersOnSite()
         {
             var orders = _orderRepository.GetAll();
@@ -97,7 +91,7 @@ namespace RestaurantApp.DataProviders
         {
             var orders = _orderRepository.GetAll();
             return orders.Select(p => p)
-                .Where(p => p.Completed == true)
+                .Where(p => p.Status == true)
                 .ToList();
         }
 
@@ -105,7 +99,7 @@ namespace RestaurantApp.DataProviders
         {
             var orders = _orderRepository.GetAll();
             return orders.Select(p => p)
-                .Where(p => p.Completed == false)
+                .Where(p => p.Status == false)
                 .ToList();
         }
 

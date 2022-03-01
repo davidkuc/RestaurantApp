@@ -10,12 +10,14 @@ namespace RestaurantApp.DataProviders
     public interface IDishProvider
     {
         List<Dish>? SortByPriceAsc();
+
         List<Dish>? SortByPriceDesc();
 
         List<Dish>? DishesAboveValue(decimal minPrice);
 
         List<Dish>? DishesBelowValue(decimal maxPrice);
 
-        string GetDishInfo(int id);
+        List<Supply>? GetDishIngredients(Dish dish);
+
     }
 }
