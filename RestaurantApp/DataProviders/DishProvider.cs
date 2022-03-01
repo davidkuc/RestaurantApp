@@ -38,19 +38,10 @@ namespace RestaurantApp.DataProviders
             return dishes.Select(p => p).OrderByDescending(p => p.Price).ToList();
         }
 
-        public List<IGrouping<Order, Dish>>? GetDishes()
+        public List<Supply>? GetDishIngredients(Dish dish)
         {
             var dishes = _dishRepository.GetAll();
-
-            return dishes.Select(p => p)
-                .Where(p => p.)
-                .ToList();
-        }
-
-        public List<Supply>? GetDishIngredients(int id)
-        {
-            var dishes = _dishRepository.GetAll();
-            return dishes.SingleOrDefault(p => p.Id == id)
+            return dishes.SingleOrDefault(p => p.Id == dish.Id)
                 .Supplies?.ToList();
         }
 

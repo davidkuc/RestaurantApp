@@ -12,7 +12,16 @@ namespace RestaurantApp.DataProviders
             _supplyRepository = supplyRepository;
         }
 
-        public List<IGrouping<SupplyCategories?, Supply>>? GroupByCategory()
+        public List<IGrouping<string, Supply>>? GetIngredientsGroupedByCategory()
+        {
+            var supplies = _supplyRepository.GetAll();
+            var result = supplies.GroupBy(x => x.Category)
+                .Where(p => p.Key != Enum.GetName(typeof(SupplyCategories), 6) && p.Key != Enum.GetName(typeof(SupplyCategories), 7))
+                .ToList();
+            return result;
+        }
+
+        public List<IGrouping<string?, Supply>>? GroupByCategory()
         {
             var supplies = _supplyRepository.GetAll();
             var result = supplies.GroupBy(x => x.Category).ToList();
@@ -22,7 +31,7 @@ namespace RestaurantApp.DataProviders
         public List<IGrouping<int, Supply>> GroupBySupplier()
         {
             var supplies = _supplyRepository.GetAll();
-            var result = supplies.GroupBy(x => x.SupplierId).ToList();
+            var result = supplies.GroupBy(x => x.SupplierID).ToList();
             return result;
         }
 

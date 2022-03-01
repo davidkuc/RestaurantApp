@@ -17,5 +17,7 @@ namespace RestaurantApp.DataProviders
 
         List<Dish>? DishesBelowValue(decimal maxPrice);
 
+        List<Supply>? GetDishIngredients(Dish dish);
+
     }
 }
