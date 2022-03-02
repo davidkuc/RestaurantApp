@@ -22,7 +22,7 @@ namespace RestaurantApp.DataProviders
 
         decimal? GetOrderValue(int id);
 
-        List<IGrouping<int, Order>>? GroupByEmployee();
+        List<IGrouping<int?, Order>> GroupByEmployee();
 
     }
 }

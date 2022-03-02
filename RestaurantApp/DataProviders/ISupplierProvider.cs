@@ -5,8 +5,8 @@ namespace RestaurantApp.DataProviders
 
     public interface ISupplierProvider
     {
-        List<IGrouping<SupplyCategories?, Order>>? GroupByCategory();
-        List<Order>? SortByCategory();
+        List<IGrouping<string?, Supplier>>? GroupByCategory();
+        List<Supplier>? SortByCategory();
         List<Supply>? GetSupplies(int id);
     }
 }
