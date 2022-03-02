@@ -14,53 +14,52 @@ namespace RestaurantApp.DataProviders
 
         public List<IGrouping<string, Supply>>? GetIngredientsGroupedByCategory()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.GroupBy(x => x.Category)
+            return _supplyRepository.GetAll().
+                GroupBy(x => x.Category)
                 .Where(p => p.Key != Enum.GetName(typeof(SupplyCategories), 6) && p.Key != Enum.GetName(typeof(SupplyCategories), 7))
                 .ToList();
-            return result;
         }
 
         public List<IGrouping<string?, Supply>>? GroupByCategory()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.GroupBy(x => x.Category).ToList();
-            return result;
+            return _supplyRepository.GetAll()
+                .GroupBy(x => x.Category).
+                ToList();
         }
 
         public List<IGrouping<int, Supply>> GroupBySupplier()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.GroupBy(x => x.SupplierID).ToList();
-            return result;
+            return _supplyRepository.GetAll()
+                .GroupBy(x => x.SupplierID)
+                .ToList(); 
         }
 
         public List<Supply> SortByCategory()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.OrderBy(x => x.Category).ToList();
-            return result;
+            return _supplyRepository.GetAll()
+                .OrderBy(x => x.Category)
+                .ToList();
         }
 
         public List<Supply> SortByExpirationDate()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.OrderBy(x => x.ExpirationDate).ToList();
-            return result;
+            return _supplyRepository.GetAll()
+                .OrderBy(x => x.ExpirationDate)
+                .ToList();
         }
 
         public List<Supply> SortByPurchaseDate()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.OrderBy(x => x.PurchaseDate).ToList();
-            return result;
+            return _supplyRepository.GetAll()
+                .OrderBy(x => x.PurchaseDate)
+                .ToList();
         }
 
         public List<Supply> SortByQuantity()
         {
-            var supplies = _supplyRepository.GetAll();
-            var result = supplies.OrderBy(x => x.Quantity).ToList();
-            return result;
+            return _supplyRepository.GetAll()
+                .OrderBy(x => x.Quantity)
+                .ToList();
         }
     }
 }

@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 namespace RestaurantApp.Repositories.Extensions
 {
     public static class RepositoryExtensions
-    {
-       
+    {    
         public static T[] AddBatch<T>(this IRepository<T> repository, T[] items)
      where T : class, IEntity
         {
@@ -33,5 +32,7 @@ namespace RestaurantApp.Repositories.Extensions
             repository.Save();
             return items;
         }
+
+
     }
 }
