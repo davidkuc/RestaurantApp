@@ -5,7 +5,7 @@ using RestaurantApp.Repositories;
 public class Application : IApplication
 {
     private readonly IRepository<Employee> _employeeRepository;
-    private readonly IRepository<Order> _supplierRepository;
+    private readonly IRepository<Supplier> _supplierRepository;
     private readonly IRepository<Supply> _supplyRepository;
     private readonly IRepository<Order> _orderRepository;
     private readonly IRepository<Dish> _dishRepository;
@@ -13,7 +13,7 @@ public class Application : IApplication
 
     public Application(IRepository<Employee> employeeRepository,
         DbContext dbContext,
-        IRepository<Order> supplierRepository,
+        IRepository<Supplier> supplierRepository,
         IRepository<Supply> supplyRepository,
         IRepository<Dish> dishRepository,
         IRepository<Order> orderRepository)
