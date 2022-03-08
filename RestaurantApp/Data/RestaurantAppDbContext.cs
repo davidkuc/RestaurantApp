@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantApp.Entities;
-
-
+using System.Configuration;
+using RestaurantApp.Data.DataExtensions;
+using RestaurantApp.Data.Entities;
 
 namespace RestaurantApp.Data
 {
     public partial class RestaurantAppDbContext : DbContext
     {
         public DbSet<Employee> Employees => Set<Employee>();
-        public DbSet<Order> Suppliers => Set<Order>();
+        public DbSet<Supplier> Suppliers => Set<Supplier>();
         public DbSet<Supply> Supplies => Set<Supply>();
         public DbSet<Dish> Dishes => Set<Dish>();
         public DbSet<Order> Orders => Set<Order>();
@@ -22,8 +22,9 @@ namespace RestaurantApp.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=EFCore_CodeFirst_RestaurantApp;" +
-    "Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer(ConfigurationManager
+                .ConnectionStrings["DefaultConnectionString"]
+                .ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
