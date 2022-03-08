@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantApp.Entities;
-
-
+using System.Configuration;
+using RestaurantApp.Data.DataExtensions;
+using RestaurantApp.Data.Entities;
 
 namespace RestaurantApp.Data
 {
@@ -22,8 +22,9 @@ namespace RestaurantApp.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=EFCore_CodeFirst_RestaurantApp;" +
-    "Trusted_Connection = True;");
+            optionsBuilder.UseSqlServer(ConfigurationManager
+                .ConnectionStrings["DefaultConnectionString"]
+                .ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

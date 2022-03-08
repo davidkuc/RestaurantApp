@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using RestaurantApp.Data;
-using RestaurantApp.Entities;
-using RestaurantApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RestaurantApp.Data.Entities;
+using RestaurantApp.Data.Repositories;
 
 namespace RestaurantAppTests
 {

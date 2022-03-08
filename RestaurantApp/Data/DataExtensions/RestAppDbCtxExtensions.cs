@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantApp.Entities;
+using RestaurantApp.Data;
+using RestaurantApp.Data.Entities;
 
-namespace RestaurantApp.Data
+namespace RestaurantApp.Data.DataExtensions
 {
    
         public static class RestAppDbCtxExtensions
