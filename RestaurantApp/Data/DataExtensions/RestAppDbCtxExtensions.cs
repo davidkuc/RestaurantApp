@@ -23,7 +23,9 @@ namespace RestaurantApp.Data
                 modelBuilder.Entity<Supply>()
                     .Property(p => p.PurchaseDate)
                     .HasColumnType("smalldatetime");
-            }
+     
+                  
+        }
         }
     
 }

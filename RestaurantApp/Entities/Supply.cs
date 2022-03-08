@@ -15,7 +15,7 @@ namespace RestaurantApp.Entities
         public string? Category { get; set; }
         public int? Quantity { get; set; }     
         public int SupplierID { get; set; }
-        public Order Supplier { get; set; }
+        public Supplier Supplier { get; set; }
 
         public ICollection<Dish>? Dishes { get; set; }
 

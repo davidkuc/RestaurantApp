@@ -64,18 +64,12 @@ namespace RestaurantApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("NameLength")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("PricePerDish")
+                    b.Property<decimal>("Price")
                         .HasColumnType("smallmoney");
-
-                    b.Property<decimal?>("TotalSales")
-                        .HasColumnType("money");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Dish");
+                    b.ToTable("Dishes");
                 });
 
             modelBuilder.Entity("RestaurantApp.Entities.Employee", b =>
@@ -110,23 +104,26 @@ namespace RestaurantApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("OrderDateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("smalldatetime");
 
-                    b.Property<decimal>("OrderValue")
+                    b.Property<decimal?>("OrderValue")
                         .HasColumnType("smallmoney");
 
-                    b.Property<bool>("ToGo")
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("ToGo")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("RestaurantApp.Entities.Supplier", b =>
@@ -142,7 +139,6 @@ namespace RestaurantApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SupplyCategory")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -161,25 +157,25 @@ namespace RestaurantApp.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ExpirationDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("smalldatetime");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PurchaseDate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("PurchaseDate")
+                        .HasColumnType("smalldatetime");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupplierId")
+                    b.Property<int>("SupplierID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SupplierId");
+                    b.HasIndex("SupplierID");
 
                     b.ToTable("Supplies");
                 });
@@ -218,9 +214,7 @@ namespace RestaurantApp.Migrations
                 {
                     b.HasOne("RestaurantApp.Entities.Employee", "Employee")
                         .WithMany("Orders")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });
@@ -229,7 +223,7 @@ namespace RestaurantApp.Migrations
                 {
                     b.HasOne("RestaurantApp.Entities.Supplier", "Supplier")
                         .WithMany("Supplies")
-                        .HasForeignKey("SupplierId")
+                        .HasForeignKey("SupplierID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
