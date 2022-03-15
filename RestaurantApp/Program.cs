@@ -2,10 +2,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RestaurantApp.Data;
 using RestaurantApp.Components.DataProviders;
-using RestaurantApp.Components.UserCommunication;
-using RestaurantApp.Components.UserInterface;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
+using RestaurantApp.Components.UI.EntityUI;
+using RestaurantApp.Components.UI;
 
 var services = new ServiceCollection();
 services.AddSingleton<IApplication, Application>();
