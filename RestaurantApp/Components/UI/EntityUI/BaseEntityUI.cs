@@ -157,7 +157,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         protected static T ChooseEntityByID<T>(IRepository<T> repository)
             where T : class, IEntity
         {
-            Console.WriteLine("Choose entity by Id");           
+            Console.WriteLine("Choose entity by Id");
             Console.WriteLine();
             var entityID = Int32.Parse(Console.ReadLine());
             Console.WriteLine();

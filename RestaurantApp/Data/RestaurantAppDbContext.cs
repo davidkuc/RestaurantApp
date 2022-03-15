@@ -19,9 +19,7 @@ namespace RestaurantApp.Data
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
+        {     
             optionsBuilder.UseSqlServer(ConfigurationManager
                 .ConnectionStrings["DefaultConnectionString"]
                 .ConnectionString);
@@ -29,7 +27,7 @@ namespace RestaurantApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            this.MapModels(modelBuilder);        
+            this.MapModels(modelBuilder);
         }
     }
 }
