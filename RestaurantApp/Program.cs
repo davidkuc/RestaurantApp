@@ -6,7 +6,6 @@ using RestaurantApp.Components.UserCommunication;
 using RestaurantApp.Components.UserInterface;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
-using RestaurantApp.Components.CsvReader;
 
 var services = new ServiceCollection();
 services.AddSingleton<IApplication, Application>();
@@ -16,11 +15,11 @@ services.AddSingleton<IRepository<Supply>, SqlRepository<Supply>>();
 services.AddSingleton<IRepository<Dish>, SqlRepository<Dish>>();
 services.AddSingleton<IRepository<Order>, OrderRepository>();
 
-services.AddSingleton<IEntityComm<Employee>, EmployeeComm>();
-services.AddSingleton<IEntityComm<Supplier>, SupplierComm>();
-services.AddSingleton<IEntityComm<Supply>, SupplyComm>();
-services.AddSingleton<IEntityComm<Dish>, DishComm>();
-services.AddSingleton<IEntityComm<Order>, OrderComm>();
+services.AddSingleton<IEntityUI<Employee>, BaseEmployeeUI>();
+services.AddSingleton<IEntityUI<Supplier>, SupplierUI>();
+services.AddSingleton<IEntityUI<Supply>, SupplyUI>();
+services.AddSingleton<IEntityUI<Dish>, BaseDishUI>();
+services.AddSingleton<IEntityUI<Order>, OrderUI>();
 
 services.AddSingleton<IEmployeeProvider, EmployeeProvider>();
 services.AddSingleton<ISupplierProvider, SupplierProvider>();
@@ -30,7 +29,6 @@ services.AddSingleton<IOrderProvider, OrderProvider>();
 
 services.AddSingleton<IUserInterface, UserInterface>();
 services.AddDbContext<DbContext, RestaurantAppDbContext>();
-services.AddSingleton<ICsvReader, CsvReader>();
 
 var serviceProvider = services.BuildServiceProvider();
 var app = serviceProvider.GetService<IApplication>()!;
