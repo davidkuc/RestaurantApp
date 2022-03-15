@@ -15,10 +15,10 @@ services.AddSingleton<IRepository<Supply>, SqlRepository<Supply>>();
 services.AddSingleton<IRepository<Dish>, SqlRepository<Dish>>();
 services.AddSingleton<IRepository<Order>, OrderRepository>();
 
-services.AddSingleton<IEntityUI<Employee>, BaseEmployeeUI>();
+services.AddSingleton<IEntityUI<Employee>, EmployeeUI>();
 services.AddSingleton<IEntityUI<Supplier>, SupplierUI>();
 services.AddSingleton<IEntityUI<Supply>, SupplyUI>();
-services.AddSingleton<IEntityUI<Dish>, BaseDishUI>();
+services.AddSingleton<IEntityUI<Dish>, DishUI>();
 services.AddSingleton<IEntityUI<Order>, OrderUI>();
 
 services.AddSingleton<IEmployeeProvider, EmployeeProvider>();
@@ -27,7 +27,7 @@ services.AddSingleton<ISupplyProvider, SupplyProvider>();
 services.AddSingleton<IDishProvider, DishProvider>();
 services.AddSingleton<IOrderProvider, OrderProvider>();
 
-services.AddSingleton<IUserInterface, UserInterface>();
+services.AddSingleton<IStartUI, StartUI>();
 services.AddDbContext<DbContext, RestaurantAppDbContext>();
 
 var serviceProvider = services.BuildServiceProvider();
