@@ -6,6 +6,7 @@ using RestaurantApp.Components.UserCommunication;
 using RestaurantApp.Components.UserInterface;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
+using RestaurantApp.Components.CsvReader;
 
 var services = new ServiceCollection();
 services.AddSingleton<IApplication, Application>();
@@ -29,7 +30,7 @@ services.AddSingleton<IOrderProvider, OrderProvider>();
 
 services.AddSingleton<IUserInterface, UserInterface>();
 services.AddDbContext<DbContext, RestaurantAppDbContext>();
-
+services.AddSingleton<ICsvReader, CsvReader>();
 
 var serviceProvider = services.BuildServiceProvider();
 var app = serviceProvider.GetService<IApplication>()!;
