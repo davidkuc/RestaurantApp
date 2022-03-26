@@ -12,47 +12,45 @@ namespace RestaurantAppTests
     [TestClass]
     public class SqlRepositoryTests : TestBase
     {
+        private List<Employee> expectedEmpList;
+        private SqlRepository<Employee> employeeRepo;
 
         [ClassInitialize()]
         public static void ClassInitialize(TestContext tc)
         {
-
-            tc.WriteLine(" ClassInitialize() : nothing to say for now");
+            tc.WriteLine("ClassInitialize()");
         }
-
 
         [ClassCleanup()]
         public static void ClassCleanUp()
         {
-
-
         }
 
         [TestInitialize()]
         public void TestInitialize()
         {
             dbContext = new RestaurantAppTestsDbContext();
-            TestContext.WriteLine(" TestInitialize() : nothing to say for now");
+            expectedEmpList = new List<Employee>();
+            employeeRepo = new SqlRepository<Employee>(dbContext);
+            TestContext.WriteLine("TestInitialize()");
             WriteTestDescription(GetType());
-
         }
-
 
         [TestCleanup()]
         public void TestCleanUp()
         {
-            TestContext.WriteLine(" TestCleanUp() : : nothing to say for now");
-
+            TestContext.WriteLine("TestCleanUp()");
+            dbContext.Database.EnsureDeleted();
+            dbContext.Dispose();
+            
         }
-
 
         [TestMethod]
         [Description("Checking if GetById() returns proper item from repository")]
         [TestCategory("WithoutException")]
-        public void GetByIdReturnsProperItems()
+        public void GetById_ReturnsProperItems()
         {
-            var expectedEmpList = new List<Employee>();
-            var employeeRepo = new SqlRepository<Employee>(dbContext);
+
             expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
             expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2 });
             expectedEmpList.Add(new Employee { FirstName = "Charlie", LastName = "C", Id = 3 });
@@ -65,18 +63,18 @@ namespace RestaurantAppTests
             {
                 var actualEmployee = employeeRepo.GetById(i);
                 Assert.AreEqual(JsonConvert.SerializeObject(expectedEmpList[i - 1]), JsonConvert.SerializeObject(actualEmployee));
-
             }
+
+
         }
 
 
         [TestMethod]
         [Description("Checking if Add() adds proper items to repository")]
         [TestCategory("WithoutException")]
-        public void AddAddsProperItemToDb()
+        public void Add_AddsProperItemToDb()
         {
-            var expectedEmpList = new List<Employee>();
-            var employeeRepo = new SqlRepository<Employee>(dbContext);
+
             expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
             expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2 });
             employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "B" });
@@ -89,15 +87,16 @@ namespace RestaurantAppTests
                 Assert.AreEqual(JsonConvert.SerializeObject(expectedEmpList[i - 1]), JsonConvert.SerializeObject(actualEmployee));
 
             }
+
+
         }
 
         [TestMethod]
         [Description("Checking if Remove() removes proper items from repository")]
         [TestCategory("WithoutException")]
-        public void RemoveRemovesProperItemsFromDb()
+        public void Remove_RemovesProperItemsFromDb()
         {
-            var expectedEmpList = new List<Employee>();
-            var employeeRepo = new SqlRepository<Employee>(dbContext);
+
             var employeeCount = 0;
             expectedEmpList.Add(null);
             expectedEmpList.Add(new Employee { FirstName = "Francis", LastName = "A", Id = 2 });
@@ -127,6 +126,25 @@ namespace RestaurantAppTests
                     Assert.IsTrue(actualEmployee == null);
                 }
             }
+
+
+        }
+
+        [TestMethod]
+        [Description("Checking if Update() updates entity data")]
+        [TestCategory("WithoutException")]
+        public void Update_UpdatesEntityData()
+        {
+            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "A" });
+            employeeRepo.Save();
+            var expectedEmployee = new Employee { FirstName = "Bart", LastName = "B", Id = 1 };
+            var employeeToUpdate = employeeRepo.GetById(1);
+
+            employeeToUpdate.FirstName = "Bart";
+            employeeToUpdate.LastName = "B";
+            employeeRepo.Update(employeeToUpdate);
+
+            Assert.AreEqual(JsonConvert.SerializeObject(expectedEmployee), JsonConvert.SerializeObject(employeeRepo.GetById(1)));
         }
     }
 }

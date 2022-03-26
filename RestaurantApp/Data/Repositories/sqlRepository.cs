@@ -46,7 +46,7 @@ namespace RestaurantApp.Data.Repositories
 
         public virtual void Save()
         {
-            _dbContext.SaveChanges();         
+            _dbContext.SaveChanges();
         }
 
         public virtual void Update(T itemChanges)

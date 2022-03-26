@@ -9,7 +9,6 @@ namespace RestaurantApp.Data.Entities
 {
     public class Supplier : EntityBase
     {
-
         public string Name { get; set; }
         public string? SupplyCategory { get; set; }
 

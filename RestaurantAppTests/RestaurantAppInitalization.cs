@@ -5,20 +5,15 @@ namespace RestaurantAppTests
 {
     public class RestaurantAppTestsInitalization
     {
-
         [AssemblyInitialize()]
         public static void AssemblyInitialize(TestContext tc)
         {
-
-            tc.WriteLine($"AssemblyInitialize() : nothing to say for now");
-            
-
+            tc.WriteLine($"AssemblyInitialize()");
         }
 
         [AssemblyCleanup()]
         public static void AssemblyCleanUp()
         {
-
 
         }
     }
