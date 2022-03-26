@@ -3,16 +3,20 @@ using RestaurantApp.Components.DataProviders;
 using RestaurantApp.Data.Entities.Enums;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
+using RestaurantApp.Components.Audit;
 
 namespace RestaurantApp.Components.UI.EntityUI
 {
     public abstract class BaseEntityUI<T> : IEntityUI<T> where T : class, IEntity
     {
         protected readonly IRepository<T> _baseRepository;
+        private readonly IAuditWriter _auditWriter;
 
-        protected BaseEntityUI(IRepository<T> baseRepository)
+        protected BaseEntityUI(IRepository<T> baseRepository
+            , IAuditWriter auditWriter)
         {
             _baseRepository = baseRepository;
+            _auditWriter = auditWriter;
         }
 
         public abstract List<T> Add();

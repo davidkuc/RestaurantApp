@@ -9,6 +9,7 @@ using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
 using RestaurantApp.Components.UI.EntityUI;
 using RestaurantApp.Data.Repositories.RepositoryExtensions;
+using RestaurantApp.Components.Audit;
 
 namespace RestaurantApp.Components.UI.EntityUI
 {
@@ -17,7 +18,8 @@ namespace RestaurantApp.Components.UI.EntityUI
         private readonly ISupplierProvider _provider;
 
         public SupplierUI(IRepository<Supplier> baseRepository
-            , ISupplierProvider provider) : base(baseRepository)
+            , ISupplierProvider provider
+            , IAuditWriter auditWriter) : base(baseRepository, auditWriter)
         {
             _provider = provider;
         }

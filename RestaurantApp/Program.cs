@@ -7,6 +7,7 @@ using RestaurantApp.Data.Repositories;
 using RestaurantApp.Components.UI.EntityUI;
 using RestaurantApp.Components.UI;
 using System.Configuration;
+using RestaurantApp.Components.Audit;
 
 var services = new ServiceCollection();
 services.AddSingleton<IApplication, Application>();
@@ -30,6 +31,8 @@ services.AddSingleton<IOrderProvider, OrderProvider>();
 
 services.AddSingleton<IStartUI, StartUI>();
 services.AddDbContext<DbContext, RestaurantAppDbContext>();
+
+services.AddSingleton<IAuditWriter, AuditWriter>();
 
 var serviceProvider = services.BuildServiceProvider();
 var app = serviceProvider.GetService<IApplication>()!;

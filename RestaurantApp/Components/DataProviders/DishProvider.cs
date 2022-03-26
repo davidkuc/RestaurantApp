@@ -7,14 +7,12 @@ namespace RestaurantApp.Components.DataProviders
     public class DishProvider : IDishProvider
     {
         private readonly IRepository<Dish> _dishRepository;
-        private readonly IRepository<Order> _orderRepository;
 
-        public DishProvider(IRepository<Dish> dishRepository,
-            IRepository<Order> orderRepository)
+        public DishProvider(IRepository<Dish> dishRepository)
         {
             _dishRepository = dishRepository;
-            _orderRepository = orderRepository;
         }
+
         public List<Dish> DishesAboveValue(decimal minPrice)
         {
             return _dishRepository.GetAll()

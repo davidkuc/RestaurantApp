@@ -3,6 +3,7 @@ using RestaurantApp.Data.Entities.Enums;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
 using RestaurantApp.Data.Repositories.RepositoryExtensions;
+using RestaurantApp.Components.Audit;
 
 namespace RestaurantApp.Components.UI.EntityUI
 {
@@ -11,7 +12,8 @@ namespace RestaurantApp.Components.UI.EntityUI
         private readonly IEmployeeProvider _provider;
 
         public EmployeeUI(IRepository<Employee> baseRepository
-            , IEmployeeProvider provider) : base(baseRepository)
+            , IEmployeeProvider provider
+            , IAuditWriter auditWriter) : base(baseRepository, auditWriter)
         {
             _provider = provider;
         }

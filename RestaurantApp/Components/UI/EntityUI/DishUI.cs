@@ -3,6 +3,7 @@ using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
 using RestaurantApp.Components.UI.EntityUI;
 using RestaurantApp.Data.Repositories.RepositoryExtensions;
+using RestaurantApp.Components.Audit;
 
 namespace RestaurantApp.Components.UI.EntityUI
 {
@@ -15,7 +16,8 @@ namespace RestaurantApp.Components.UI.EntityUI
         public DishUI(IRepository<Dish> baseRepository
             , IRepository<Supply> supplyRepository
             , IDishProvider provider
-            , ISupplyProvider supplyProvider) : base(baseRepository)
+            , ISupplyProvider supplyProvider
+            , IAuditWriter auditWriter) : base(baseRepository, auditWriter)
         {
             _provider = provider;
             _supplyProvider = supplyProvider;
