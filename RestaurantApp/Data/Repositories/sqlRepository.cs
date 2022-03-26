@@ -9,18 +9,15 @@ using RestaurantApp.Data.Repositories;
 
 namespace RestaurantApp.Data.Repositories
 {
-
-
-
     public class SqlRepository<T> : IRepository<T> where T : class, IEntity, new()
-    {    
+    {
         protected readonly DbSet<T> _dbSet;
         protected readonly DbContext _dbContext;
 
         public SqlRepository(DbContext dbContext)
         {
-           _dbContext = dbContext;
-            _dbSet = _dbContext.Set<T>();           
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
         }
 
         public event EventHandler<T>? ItemAdded;
@@ -41,7 +38,7 @@ namespace RestaurantApp.Data.Repositories
         public virtual void Remove(T item)
         {
             _dbSet.Remove(item);
-          ItemRemoved?.Invoke(this, item);
+            ItemRemoved?.Invoke(this, item);
         }
 
         public virtual void Save()
@@ -59,6 +56,6 @@ namespace RestaurantApp.Data.Repositories
         public virtual IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
-        }        
+        }
     }
 }
