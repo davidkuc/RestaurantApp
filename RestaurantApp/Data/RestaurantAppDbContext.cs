@@ -5,7 +5,7 @@ using RestaurantApp.Data.Entities;
 
 namespace RestaurantApp.Data
 {
-    public partial class RestaurantAppDbContext : DbContext
+    public class RestaurantAppDbContext : DbContext
     {
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<Supplier> Suppliers => Set<Supplier>();
@@ -13,16 +13,14 @@ namespace RestaurantApp.Data
         public DbSet<Dish> Dishes => Set<Dish>();
         public DbSet<Order> Orders => Set<Order>();
 
-        public RestaurantAppDbContext()
+        public RestaurantAppDbContext() 
         {
 
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {     
-            optionsBuilder.UseSqlServer(ConfigurationManager
-                .ConnectionStrings["DefaultConnectionString"]
-                .ConnectionString);
+        {
+            optionsBuilder.UseSqlServer("Data Source = .;Initial Catalog = RestaurantApp;Trusted_Connection = True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

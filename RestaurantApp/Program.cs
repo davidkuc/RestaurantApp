@@ -6,6 +6,7 @@ using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
 using RestaurantApp.Components.UI.EntityUI;
 using RestaurantApp.Components.UI;
+using System.Configuration;
 
 var services = new ServiceCollection();
 services.AddSingleton<IApplication, Application>();

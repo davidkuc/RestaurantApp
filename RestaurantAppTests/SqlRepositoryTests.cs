@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using RestaurantApp.Data;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using RestaurantApp.Data.Entities;
@@ -13,11 +12,11 @@ namespace RestaurantAppTests
     [TestClass]
     public class SqlRepositoryTests : TestBase
     {
-
+        
         [ClassInitialize()]
         public static void ClassInitialize(TestContext tc)
         {
-
+            
             tc.WriteLine(" ClassInitialize() : nothing to say for now");
         }
 
@@ -27,15 +26,14 @@ namespace RestaurantAppTests
         {
 
 
-
-
         }
 
         [TestInitialize()]
         public void TestInitialize()
         {
+            dbContext = new RestaurantAppTestsDbContext();
             TestContext.WriteLine(" TestInitialize() : nothing to say for now");
-            WriteTestDescription(this.GetType());
+            WriteTestDescription(GetType());
 
         }
 
@@ -57,7 +55,7 @@ namespace RestaurantAppTests
 
             var expectedEmpList = new List<Employee>();
 
-            var employeeRepo = new SqlRepository<Employee>(new RestaurantAppDbContext());
+            var employeeRepo = new SqlRepository<Employee>(dbContext);
 
             expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
             expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2 });
@@ -89,7 +87,7 @@ namespace RestaurantAppTests
 
             var expectedEmpList = new List<Employee>();
 
-            var employeeRepo = new SqlRepository<Employee>(new RestaurantAppDbContext());
+            var employeeRepo = new SqlRepository<Employee>(dbContext);
 
             expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
             expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2 });
@@ -119,7 +117,7 @@ namespace RestaurantAppTests
         {
 
             var expectedEmpList = new List<Employee>();
-            var employeeRepo = new SqlRepository<Employee>(new RestaurantAppDbContext());
+            var employeeRepo = new SqlRepository<Employee>(dbContext);
 
             expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
 
