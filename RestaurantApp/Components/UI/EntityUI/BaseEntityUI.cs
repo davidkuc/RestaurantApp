@@ -16,9 +16,10 @@ namespace RestaurantApp.Components.UI.EntityUI
             , IAuditWriter auditWriter)
         {
             _baseRepository = baseRepository;
-            _baseRepository.
+            _baseRepository.ItemAdded += OnEntityAdded;
+            _baseRepository.ItemUpdated += OnEntityUpdated;
+            _baseRepository.ItemRemoved += OnEntityRemoved;
             _auditWriter = auditWriter;
-
         }
 
         public abstract List<T> Add();
