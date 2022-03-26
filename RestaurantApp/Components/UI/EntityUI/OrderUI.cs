@@ -372,21 +372,21 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenEntity.EmployeeId = newEmployeeID;
         }
 
-        void OnOrderAdded(object? sender, Order item)
+        protected override void OnEntityAdded(object? sender, Order item)
         {
             var message = $"Order {item.Id} added by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
-        void OnOrderRemoved(object? sender, Order item)
+        protected override void OnEntityRemoved(object? sender, Order item)
         {
             var message = $"Order {item.Id} removed by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
-        void OnOrderUpdated(object? sender, Order item)
+        protected override void OnEntityUpdated(object? sender, Order item)
         {
             var message = $"Order {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);

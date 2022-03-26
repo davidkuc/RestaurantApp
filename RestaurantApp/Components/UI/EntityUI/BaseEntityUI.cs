@@ -16,7 +16,9 @@ namespace RestaurantApp.Components.UI.EntityUI
             , IAuditWriter auditWriter)
         {
             _baseRepository = baseRepository;
+            _baseRepository.
             _auditWriter = auditWriter;
+
         }
 
         public abstract List<T> Add();
@@ -26,6 +28,14 @@ namespace RestaurantApp.Components.UI.EntityUI
         public abstract void Display();
 
         public abstract void Update();
+
+        protected abstract void OnEntityAdded(object? sender, T item);
+
+        protected abstract void OnEntityRemoved(object? sender, T item);
+
+        protected abstract void OnEntityUpdated(object? sender, T item);
+
+
 
         protected static void DisplayEmployees(IRepository<Employee> employeeRepository)
         {
@@ -166,7 +176,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             var entityID = Int32.Parse(Console.ReadLine());
             Console.WriteLine();
             Console.WriteLine("2 - exit");
-            if (entityID == 2 )
+            if (entityID == 2)
             {
                 return null;
             }

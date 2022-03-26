@@ -230,21 +230,21 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupplier.Name = newFirmName;
         }
 
-        void OnSupplierAdded(object? sender, Supplier item)
+        protected override void OnEntityAdded(object? sender, Supplier item)
         {
             var message = $"Supplier {item.Name} added by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
-        void OnSupplierRemoved(object? sender, Supplier item)
+        protected override void OnEntityRemoved(object? sender, Supplier item)
         {
             var message = $"Supplier {item.Name} removed by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
-        void OnSupplierRUpdated(object? sender, Supplier item)
+        protected override void OnEntityUpdated(object? sender, Supplier item)
         {
             var message = $"Supplier {item.Name} at ID: {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);

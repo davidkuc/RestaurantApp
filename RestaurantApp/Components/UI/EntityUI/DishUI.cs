@@ -23,7 +23,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             _supplyProvider = supplyProvider;
             _supplyRepository = supplyRepository;
         }
-
+       
         public override List<Dish> Add()
         {
             Console.WriteLine();
@@ -358,21 +358,21 @@ namespace RestaurantApp.Components.UI.EntityUI
             }
         }
 
-        void OnDishAdded(object? sender, Dish item)
+        protected override void OnEntityAdded(object? sender, Dish item)
         {
             var message = $"Dish {item.Name} added by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
-        void OnDishRemoved(object? sender, Dish item)
+        protected override void OnEntityRemoved(object? sender, Dish item)
         {
             var message = $"Dish {item.Name} removed by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
-        void OnDishUpdated(object? sender, Dish item)
+        protected override void OnEntityUpdated(object? sender, Dish item)
         {
             var message = $"Dish {item.Name} at ID: {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);
