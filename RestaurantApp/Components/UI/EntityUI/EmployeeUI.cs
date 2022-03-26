@@ -241,7 +241,7 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         void OnEmployeeUpdated(object? sender, Employee item)
         {
-            var message = $"Employee {item.FirstName} {item.LastName} updated by {nameof(_baseRepository)}";
+            var message = $"Employee {item.FirstName} {item.LastName} at ID: {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }

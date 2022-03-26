@@ -22,6 +22,7 @@ namespace RestaurantApp.Data.Repositories
 
         public event EventHandler<T>? ItemAdded;
         public event EventHandler<T>? ItemRemoved;
+        public event EventHandler<T>? ItemUpdated;
 
         public virtual T? GetById(int id)
         {
@@ -51,6 +52,7 @@ namespace RestaurantApp.Data.Repositories
             var item = _dbSet.Attach(itemChanges);
             item.State = EntityState.Modified;
             Save();
+            ItemUpdated?.Invoke(this, itemChanges);
         }
 
         public virtual IEnumerable<T> GetAll()

@@ -374,7 +374,7 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         void OnDishUpdated(object? sender, Dish item)
         {
-            var message = $"Dish {item.Name} updated by {nameof(_baseRepository)}";
+            var message = $"Dish {item.Name} at ID: {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }

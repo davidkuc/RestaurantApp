@@ -246,7 +246,7 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         void OnSupplierRUpdated(object? sender, Supplier item)
         {
-            var message = $"Supplier {item.Name} updated by {nameof(_baseRepository)}";
+            var message = $"Supplier {item.Name} at ID: {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }

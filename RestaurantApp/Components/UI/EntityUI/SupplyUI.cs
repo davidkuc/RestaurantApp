@@ -349,21 +349,21 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         void OnSupplyAdded(object? sender, Supply item)
         {
-            var message = $"Supply {item.Name} {item.Category} added by {nameof(_baseRepository)}";
+            var message = $"Supply |{item.Name}| Category: {item.Category} added by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
         void OnSupplyRemoved(object? sender, Supply item)
         {
-            var message = $"Supply {item.Name} {item.Category} removed by {nameof(_baseRepository)}";
+            var message = $"Supply |{item.Name}| Category: {item.Category} removed by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
 
         void OnSupplyUpdated(object? sender, Supply item)
         {
-            var message = $"Supply {item.Name} {item.Category} updated by {nameof(_baseRepository)}";
+            var message = $"Supply |{item.Name}| Category: {item.Category} at ID: {item.Id} updated by {nameof(_baseRepository)}";
             Console.WriteLine(message);
             _auditWriter.AddToAuditBatch(message);
         }
