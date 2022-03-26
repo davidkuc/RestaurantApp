@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RestaurantApp.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,9 @@ using System.Threading.Tasks;
 
 namespace RestaurantAppTests
 {
-
-
-
-    public class TestBase
+    public abstract class TestBase
     {
-
-        
+        protected DbContext dbContext;
 
         public TestContext TestContext { get; set; }
 
@@ -31,10 +29,7 @@ namespace RestaurantAppTests
                     var dattr = (DescriptionAttribute)attr;
                     TestContext.WriteLine($"Test description: {dattr.Description}");
                 }
-
             }
         }
-
-
     }
 }

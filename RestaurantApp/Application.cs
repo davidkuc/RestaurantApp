@@ -1,22 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RestaurantApp.Components.DataProviders;
-using RestaurantApp.Components.UserCommunication;
-using RestaurantApp.Components.UserInterface;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
+using RestaurantApp.Components.UI;
 
 public class Application : IApplication
 {
-    private readonly IUserInterface _userInterface;
+    private readonly IStartUI _userInterface;
 
-    public Application(IUserInterface userInterface)
+    public Application(IStartUI userInterface)
     {
         _userInterface = userInterface;
     }
 
     public void Run()
     {
-        _userInterface.StartUI();
+        _userInterface.InitializeUI();
     }
 }
 
