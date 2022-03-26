@@ -356,7 +356,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             }
         }
 
-        private static void UpdateOrderStatus(Order chosenEntity)
+        private void UpdateOrderStatus(Order chosenEntity)
         {
             Console.WriteLine("Enter order status");
             DisplayOrderStatuses();
@@ -365,11 +365,32 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenEntity.Status = newOrderStatus;
         }
 
-        private static void UpdateOrderEmployeeID(Order chosenEntity)
+        private void UpdateOrderEmployeeID(Order chosenEntity)
         {
             Console.WriteLine("Enter employee ID");
             var newEmployeeID = Int32.Parse(Console.ReadLine());
             chosenEntity.EmployeeId = newEmployeeID;
+        }
+
+        void OnOrderAdded(object? sender, Order item)
+        {
+            var message = $"Order {item.Id} added by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnOrderRemoved(object? sender, Order item)
+        {
+            var message = $"Order {item.Id} removed by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnOrderUpdated(object? sender, Order item)
+        {
+            var message = $"Order {item.Id} updated by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
         }
     }
 }

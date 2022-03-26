@@ -224,5 +224,26 @@ namespace RestaurantApp.Components.UI.EntityUI
                 }
             }
         }
+
+        void OnEmployeeAdded(object? sender, Employee item)
+        {
+            var message = $"Employee {item.FirstName} {item.LastName} added by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnEmployeeRemoved(object? sender, Employee item)
+        {
+            var message = $"Employee {item.FirstName} {item.LastName} removed by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+           _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnEmployeeUpdated(object? sender, Employee item)
+        {
+            var message = $"Employee {item.FirstName} {item.LastName} updated by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
     }
 }

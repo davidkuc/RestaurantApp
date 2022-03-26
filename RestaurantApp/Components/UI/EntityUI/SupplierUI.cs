@@ -214,7 +214,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             }
         }
 
-        private static void UpdateSupplyCategory(Supplier chosenSupplier)
+        private void UpdateSupplyCategory(Supplier chosenSupplier)
         {
             Console.WriteLine("Enter supply category ID");
             DisplaySupplyCategories();
@@ -223,11 +223,32 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupplier.SupplyCategory = newSupplyCategory;
         }
 
-        private static void UpdateSupplierFirmName(Supplier chosenSupplier)
+        private void UpdateSupplierFirmName(Supplier chosenSupplier)
         {
             Console.WriteLine("Enter new supplier firm name");
             var newFirmName = Console.ReadLine();
             chosenSupplier.Name = newFirmName;
+        }
+
+        void OnSupplierAdded(object? sender, Supplier item)
+        {
+            var message = $"Supplier {item.Name} added by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnSupplierRemoved(object? sender, Supplier item)
+        {
+            var message = $"Supplier {item.Name} removed by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnSupplierRUpdated(object? sender, Supplier item)
+        {
+            var message = $"Supplier {item.Name} updated by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
         }
     }
 }

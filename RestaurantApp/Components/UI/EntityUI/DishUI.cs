@@ -336,7 +336,7 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         }
 
-        private static void DeleteIngredientBatch(Dish chosenDish, List<Supply> ingredientsToDelete)
+        private void DeleteIngredientBatch(Dish chosenDish, List<Supply> ingredientsToDelete)
         {
             foreach (var ingredient in ingredientsToDelete)
             {
@@ -350,12 +350,33 @@ namespace RestaurantApp.Components.UI.EntityUI
             AddIngredientBatch(chosenDish, ingredientsToAdd);
         }
 
-        private static void AddIngredientBatch(Dish chosenDish, ICollection<Supply> ingredientsToAdd)
+        private void AddIngredientBatch(Dish chosenDish, ICollection<Supply> ingredientsToAdd)
         {
             foreach (var ingredient in ingredientsToAdd)
             {
                 chosenDish.Supplies.Add(ingredient);
             }
+        }
+
+        void OnDishAdded(object? sender, Dish item)
+        {
+            var message = $"Dish {item.Name} added by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnDishRemoved(object? sender, Dish item)
+        {
+            var message = $"Dish {item.Name} removed by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnDishUpdated(object? sender, Dish item)
+        {
+            var message = $"Dish {item.Name} updated by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
         }
     }
 

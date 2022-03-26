@@ -331,7 +331,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupply.Quantity = newSupplyQuantity;
         }
 
-        private static void UpdateSupplyCategory(Supply chosenSupply)
+        private void UpdateSupplyCategory(Supply chosenSupply)
         {
             Console.WriteLine("Enter category");
             DisplaySupplyCategories();
@@ -340,11 +340,33 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupply.Category = newSupplyCategory;
         }
 
-        private static void UpdateSupplyName(Supply chosenSupply)
+        private void UpdateSupplyName(Supply chosenSupply)
         {
             Console.WriteLine("Enter new supply firm name");
             var newSupplyName = Console.ReadLine();
             chosenSupply.Name = newSupplyName;
         }
+
+        void OnSupplyAdded(object? sender, Supply item)
+        {
+            var message = $"Supply {item.Name} {item.Category} added by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnSupplyRemoved(object? sender, Supply item)
+        {
+            var message = $"Supply {item.Name} {item.Category} removed by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
+        void OnSupplyUpdated(object? sender, Supply item)
+        {
+            var message = $"Supply {item.Name} {item.Category} updated by {nameof(_baseRepository)}";
+            Console.WriteLine(message);
+            _auditWriter.AddToAuditBatch(message);
+        }
+
     }
 }

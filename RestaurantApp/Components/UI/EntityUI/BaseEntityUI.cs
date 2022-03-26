@@ -10,7 +10,7 @@ namespace RestaurantApp.Components.UI.EntityUI
     public abstract class BaseEntityUI<T> : IEntityUI<T> where T : class, IEntity
     {
         protected readonly IRepository<T> _baseRepository;
-        private readonly IAuditWriter _auditWriter;
+        protected readonly IAuditWriter _auditWriter;
 
         protected BaseEntityUI(IRepository<T> baseRepository
             , IAuditWriter auditWriter)
