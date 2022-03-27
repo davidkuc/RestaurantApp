@@ -163,26 +163,41 @@ namespace RestaurantApp.Components.UI.EntityUI
             Console.WriteLine();
         }
 
-        protected static bool ParseStringToDateTime(string input, out DateTime dateTimeVariable)
+        protected static void ParseStringToDateTime(string input, out DateTime dateTimeVariable)
         {
-            var dateTimePattern = "dd-MM-yyyy";
-            return DateTime.TryParseExact(Console.ReadLine(), dateTimePattern, null, DateTimeStyles.None, out dateTimeVariable);
+            while (!DateTime.TryParseExact(Console.ReadLine(), "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
+            {
+                Console.WriteLine("Parsing failed - wrong input");
+            }
+
+            Console.WriteLine("Date parsed correctly");
         }
 
         protected static T ChooseEntityByID<T>(IRepository<T> repository)
             where T : class, IEntity
         {
             Console.WriteLine("Choose entity by Id");
-            Console.WriteLine();
-            var entityID = Int32.Parse(Console.ReadLine());
-            Console.WriteLine();
             Console.WriteLine("2 - exit");
-            if (entityID == 2)
+            Console.WriteLine();
+            try
             {
-                return null;
+                var entityID = Int32.Parse(Console.ReadLine());
+                Console.WriteLine();
+                Console.WriteLine("2 - exit");
+                if (entityID == 2)
+                {
+                    return null;
+                }
+                var chosenEntity = repository.GetById(entityID);
+                return chosenEntity;
             }
-            var chosenEntity = repository.GetById(entityID);
-            return chosenEntity;
+            catch (FormatException)
+            {
+
+                Console.WriteLine("Invalid input - try again");
+            }
+
+            return null;
         }
     }
 }

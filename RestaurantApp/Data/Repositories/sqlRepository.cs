@@ -31,6 +31,11 @@ namespace RestaurantApp.Data.Repositories
 
         public virtual void Add(T item)
         {
+            if (item == null)
+            {
+                Console.WriteLine("Cannot add 'null'");
+                return;
+            }
 
             _dbSet.Add(item);
             ItemAdded?.Invoke(this, item);
@@ -38,6 +43,12 @@ namespace RestaurantApp.Data.Repositories
 
         public virtual void Remove(T item)
         {
+            if (item == null)
+            {
+                Console.WriteLine("Cannot remove 'null'");
+                return;
+            }
+
             _dbSet.Remove(item);
             ItemRemoved?.Invoke(this, item);
         }
@@ -49,6 +60,12 @@ namespace RestaurantApp.Data.Repositories
 
         public virtual void Update(T itemChanges)
         {
+            if (itemChanges == null)
+            {
+                Console.WriteLine("Cannot update 'null'");
+                return;
+            }
+
             var item = _dbSet.Attach(itemChanges);
             item.State = EntityState.Modified;
             Save();

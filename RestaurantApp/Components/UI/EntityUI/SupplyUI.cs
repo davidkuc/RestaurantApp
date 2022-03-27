@@ -51,10 +51,10 @@ namespace RestaurantApp.Components.UI.EntityUI
                 var category = Console.ReadLine();
                 Console.WriteLine("Enter quantity");
                 var quantity = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("Enter purchase date (DD/MM/YYYY)");
+                Console.WriteLine("Enter purchase date (DD-MM-YYYY)");
                 DateTime purchaseDate;
                 ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out purchaseDate);
-                Console.WriteLine("Enter expiration date (DD/MM/YYYY)");
+                Console.WriteLine("Enter expiration date (DD-MM-YYYY)");
                 DateTime expirationDate;
                 ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out expirationDate);
                 var newSupply = CreateSupply(name: supplyName

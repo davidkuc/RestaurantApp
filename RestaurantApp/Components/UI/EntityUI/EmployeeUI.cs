@@ -111,27 +111,34 @@ namespace RestaurantApp.Components.UI.EntityUI
                 {
                     return;
                 }
-
-                switch (userInput)
+                try
                 {
-                    case 1:
-                        DisplayEmployeeInfo();
-                        break;
-                    case 2:
-                        DisplayEmployeeOrders();
-                        break;
-                    case 3:
-                        DisplayEmployeesGroupedByRole();
-                        break;
-                    case 4:
-                        DisplayEmployeesSortedByRole();
-                        break;
-                    case 5:
-                        DisplayEmployees(_baseRepository);
-                        break;
-                    default:
-                        break;
+                    switch (userInput)
+                    {
+                        case 1:
+                            DisplayEmployeeInfo();
+                            break;
+                        case 2:
+                            DisplayEmployeeOrders();
+                            break;
+                        case 3:
+                            DisplayEmployeesGroupedByRole();
+                            break;
+                        case 4:
+                            DisplayEmployeesSortedByRole();
+                            break;
+                        case 5:
+                            DisplayEmployees(_baseRepository);
+                            break;
+                        default:
+                            break;
+                    }
                 }
+                catch (NullReferenceException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
             }
 
         }
@@ -236,7 +243,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         {
             var message = $"Employee {item.FirstName} {item.LastName} removed by {nameof(_baseRepository)}";
             Console.WriteLine(message);
-           _auditWriter.AddToAuditBatch(message);
+            _auditWriter.AddToAuditBatch(message);
         }
 
         protected override void OnEntityUpdated(object? sender, Employee item)
