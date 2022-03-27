@@ -165,12 +165,15 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         protected static void ParseStringToDateTime(string input, out DateTime dateTimeVariable)
         {
-            while (!DateTime.TryParseExact(Console.ReadLine(), "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
+            if (!DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
             {
-                Console.WriteLine("Parsing failed - wrong input");
+                while (!DateTime.TryParseExact(Console.ReadLine(), "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
+                {
+                    Console.WriteLine("Parsing failed - wrong input");
+                }
             }
 
-            Console.WriteLine("Date parsed correctly");
+            Console.WriteLine("Date parsed correctly!");
         }
 
         protected static T ChooseEntityByID<T>(IRepository<T> repository)
@@ -198,6 +201,38 @@ namespace RestaurantApp.Components.UI.EntityUI
             }
 
             return null;
+        }
+
+        protected void CheckIfEntityExistsByID(IRepository<T> repository, out int entityId)
+        {
+
+            var inputId = int.Parse(Console.ReadLine());
+            if (repository.GetById(inputId) == null)
+            {
+                Console.WriteLine($"Entity at ID {inputId} does not exist");
+                int correctedId;
+                while (true)
+                {
+                    correctedId = int.Parse(Console.ReadLine());
+                    if (repository.GetById(correctedId) == null)
+                    {
+                        Console.WriteLine($"Entity at ID {correctedId} does not exist");
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                Console.WriteLine($"Entity at ID {correctedId} found!");
+                entityId = correctedId;
+            }
+            else
+            {
+                Console.WriteLine($"Entity at ID {inputId} found!");
+                entityId = inputId;
+            }
+
         }
     }
 }

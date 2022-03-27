@@ -41,39 +41,51 @@ namespace RestaurantApp.Components.UI.EntityUI
                 var suppliers = DisplaySuppliers(_supplierRepository);
                 if (suppliers == null)
                 {
+                    Console.WriteLine("No suppliers - cannot add supply without a supplier");
                     break;
                 }
-                Console.WriteLine();
-                var supplySupplierID = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("Enter supply name");
-                var supplyName = Console.ReadLine();
-                Console.WriteLine("Enter supply category");
-                var category = Console.ReadLine();
-                Console.WriteLine("Enter quantity");
-                var quantity = Int32.Parse(Console.ReadLine());
-                Console.WriteLine("Enter purchase date (DD-MM-YYYY)");
-                DateTime purchaseDate;
-                ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out purchaseDate);
-                Console.WriteLine("Enter expiration date (DD-MM-YYYY)");
-                DateTime expirationDate;
-                ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out expirationDate);
-                var newSupply = CreateSupply(name: supplyName
-                    , category: category
-                    , quantity: quantity
-                    , purchaseDate: purchaseDate
-                    , expirationDate: expirationDate
-                    , supplierID: supplySupplierID);
-                suppliesToAdd.Add(newSupply);
-                Console.WriteLine();
-                Console.WriteLine("1 - Add another supply");
-                Console.WriteLine("q - exit");
-                Console.WriteLine();
-                var addSupplyChoice = Console.ReadLine();
-
-                if (addSupplyChoice == "q")
+                try
                 {
+                    Console.WriteLine();
+                    int supplySupplierID;
+                    CheckIfEntityExistsByID(_baseRepository, out supplySupplierID);
+                    Console.WriteLine("Enter supply name");
+                    var supplyName = Console.ReadLine();
+                    Console.WriteLine("Enter supply category");
+                    var category = Console.ReadLine();
+                    Console.WriteLine("Enter quantity");
+                    var quantity = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Enter purchase date (DD-MM-YYYY)");
+                    DateTime purchaseDate;
+                    ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out purchaseDate);
+                    Console.WriteLine("Enter expiration date (DD-MM-YYYY)");
+                    DateTime expirationDate;
+                    ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out expirationDate);
+                    var newSupply = CreateSupply(name: supplyName
+                        , category: category
+                        , quantity: quantity
+                        , purchaseDate: purchaseDate
+                        , expirationDate: expirationDate
+                        , supplierID: supplySupplierID);
+                    suppliesToAdd.Add(newSupply);
+                    Console.WriteLine();
+                    Console.WriteLine("1 - Add another supply");
+                    Console.WriteLine("q - exit");
+                    Console.WriteLine();
+                    var addSupplyChoice = Console.ReadLine();
+
+                    if (addSupplyChoice == "q")
+                    {
+                        break;
+                    }
+                }
+                catch (FormatException ex)
+                {
+
+                    Console.WriteLine(ex.Message);
                     break;
                 }
+
             }
 
             RepositoryExtensions.AddBatch(_baseRepository, suppliesToAdd);
@@ -354,7 +366,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             _auditWriter.AddToAuditBatch(message);
         }
 
-        protected override void  OnEntityRemoved(object? sender, Supply item)
+        protected override void OnEntityRemoved(object? sender, Supply item)
         {
             var message = $"Supply |{item.Name}| Category: {item.Category} removed by {nameof(_baseRepository)}";
             Console.WriteLine(message);
