@@ -68,10 +68,10 @@ namespace RestaurantApp.Components.UI.EntityUI
                 ordersToAdd.Add(newOrder);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another order");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var addEmployeeChoice = Console.ReadLine();
-                if (addEmployeeChoice == "2")
+                if (addEmployeeChoice == "q")
                 {
                     break;
                 }
@@ -109,10 +109,10 @@ namespace RestaurantApp.Components.UI.EntityUI
                 dishCollection.Add(chosenDish);
 
                 Console.WriteLine("1 - Add more dishes");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
 
                 var chooseDishesChoice = Console.ReadLine();
-                if (chooseDishesChoice == "2")
+                if (chooseDishesChoice == "q")
                 {
                     break;
                 }
@@ -134,11 +134,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 ordersToDelete.Add(orderToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another order to delete list");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var deleteOrderChoice = Console.ReadLine();
 
-                if (deleteOrderChoice == "2")
+                if (deleteOrderChoice == "q")
                 {
                     break;
                 }
@@ -166,11 +166,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("9 - Get uncompoleted orders");
                 Console.WriteLine("10 - Get orders grouped by employee");
                 Console.WriteLine("11 - Get all orders");
-                Console.WriteLine("12 - Exit");
+                Console.WriteLine("q - Exit");
                 Console.WriteLine();
                 var displayOrderChoice = Console.ReadLine();
 
-                if (displayOrderChoice == "12")
+                if (displayOrderChoice == "q")
                 {
                     return;
                 }

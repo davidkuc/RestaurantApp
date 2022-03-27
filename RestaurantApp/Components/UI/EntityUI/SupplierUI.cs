@@ -42,11 +42,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 suppliersToAdd.Add(newSupplier);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another supplier");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var addSupplierChoice = Console.ReadLine();
 
-                if (addSupplierChoice == "2")
+                if (addSupplierChoice == "q")
                 {
                     break;
                 }
@@ -80,11 +80,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 suppliersToDelete.Add(supplierToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another supplier to delete list");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var addSupplierChoice = Console.ReadLine();
 
-                if (addSupplierChoice == "2")
+                if (addSupplierChoice == "q")
                 {
                     break;
                 }
@@ -105,11 +105,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("2 - Get supplies from chosen supplier");
                 Console.WriteLine("3 - Get suppliers grouped by category");
                 Console.WriteLine("4 - Get suppliers sorted by category");
-                Console.WriteLine("5 - Exit");
+                Console.WriteLine("q - Exit");
                 Console.WriteLine();
                 var displayChoice = Console.ReadLine();
 
-                if (displayChoice == "5")
+                if (displayChoice == "q")
                 {
                     return;
                 }

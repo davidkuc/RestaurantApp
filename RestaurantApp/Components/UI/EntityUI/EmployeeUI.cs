@@ -38,11 +38,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 employeesToAdd.Add(newEmployee);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another employee");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var addEmployeeChoice = Console.ReadLine();
 
-                if (addEmployeeChoice == "2")
+                if (addEmployeeChoice == "q")
                 {
                     break;
                 }
@@ -77,11 +77,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 employeesToDelete.Add(employeeToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another employee to delete list");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var addEmployeeChoice = Console.ReadLine();
 
-                if (addEmployeeChoice == "2")
+                if (addEmployeeChoice == "q")
                 {
                     break;
                 }
@@ -103,11 +103,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("3 - Get list of employees grouped by roles");
                 Console.WriteLine("4 - Get list of employees sorted by roles");
                 Console.WriteLine("5 - Get list of all employees");
-                Console.WriteLine("6 - Exit");
+                Console.WriteLine("q - Exit");
                 Console.WriteLine();
-                var userInput = Int32.Parse(Console.ReadLine());
+                var userInput = Console.ReadLine();
 
-                if (userInput == 6)
+                if (userInput == "q")
                 {
                     return;
                 }
@@ -115,19 +115,19 @@ namespace RestaurantApp.Components.UI.EntityUI
                 {
                     switch (userInput)
                     {
-                        case 1:
+                        case "1":
                             DisplayEmployeeInfo();
                             break;
-                        case 2:
+                        case "2":
                             DisplayEmployeeOrders();
                             break;
-                        case 3:
+                        case "3":
                             DisplayEmployeesGroupedByRole();
                             break;
-                        case 4:
+                        case "4":
                             DisplayEmployeesSortedByRole();
                             break;
-                        case 5:
+                        case "5":
                             DisplayEmployees(_baseRepository);
                             break;
                         default:
@@ -197,11 +197,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("1 - First name");
                 Console.WriteLine("2 - Last name");
                 Console.WriteLine("3 - Role");
-                Console.WriteLine("4 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var modifyEmployeeMenuChoice = Console.ReadLine();
 
-                if (modifyEmployeeMenuChoice == "4")
+                if (modifyEmployeeMenuChoice == "q")
                 {
                     return;
                 }

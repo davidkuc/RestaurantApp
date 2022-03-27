@@ -42,11 +42,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 dishesToAdd.Add(newDish);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another dish");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var addDishChoice = Console.ReadLine();
 
-                if (addDishChoice == "2")
+                if (addDishChoice == "q")
                 {
                     break;
                 }
@@ -65,10 +65,10 @@ namespace RestaurantApp.Components.UI.EntityUI
                 ingredientCollection.Add(chosenIngredient);
 
                 Console.WriteLine("1 - Add more ingredients");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
 
                 var chooseIngredientsChoice = Console.ReadLine();
-                if (chooseIngredientsChoice == "2")
+                if (chooseIngredientsChoice == "q")
                 {
                     break;
                 }
@@ -117,11 +117,11 @@ namespace RestaurantApp.Components.UI.EntityUI
                 dishesToDelete.Add(dishToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another dish to delete list");
-                Console.WriteLine("2 - exit");
+                Console.WriteLine("q - exit");
                 Console.WriteLine();
                 var deleteDishChoice = Console.ReadLine();
 
-                if (deleteDishChoice == "2")
+                if (deleteDishChoice == "q")
                 {
                     break;
                 }
@@ -145,12 +145,12 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("5 - Get dishes sorted by price desc");
                 Console.WriteLine("6 - Get all dishes");
                 Console.WriteLine("7 - Get dish ingredients");
-                Console.WriteLine("8 - Exit");
+                Console.WriteLine("q - Exit");
 
                 Console.WriteLine();
                 var userInput = Console.ReadLine();
 
-                if (userInput == "8")
+                if (userInput == "q")
                 {
                     return;
                 }
