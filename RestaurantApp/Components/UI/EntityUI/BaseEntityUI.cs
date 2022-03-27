@@ -167,9 +167,10 @@ namespace RestaurantApp.Components.UI.EntityUI
         {
             if (!DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
             {
+                Console.WriteLine($"Parsing failed - Invalid input, try again");
                 while (!DateTime.TryParseExact(Console.ReadLine(), "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
                 {
-                    Console.WriteLine("Parsing failed - wrong input");
+                    Console.WriteLine($"Parsing failed - Invalid input, try again");
                 }
             }
 
