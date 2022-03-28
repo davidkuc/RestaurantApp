@@ -1,6 +1,7 @@
 ﻿using RestaurantApp.Data.Entities;
 using RestaurantApp.Components.UI.EntityUI;
 using RestaurantApp.Components.UI;
+using RestaurantApp.Data.Repositories;
 
 namespace RestaurantApp.Components.UI
 {
@@ -11,18 +12,21 @@ namespace RestaurantApp.Components.UI
         private readonly IEntityUI<Supply> _supplyUI;
         private readonly IEntityUI<Dish> _dishUI;
         private readonly IEntityUI<Order> _orderUI;
+        private readonly IRepository<Employee> _seedRepository;
 
         public StartUI(IEntityUI<Employee> employeeUI
             , IEntityUI<Supplier> supplierUI
             , IEntityUI<Supply> supplyUI
             , IEntityUI<Dish> dishUI
-            , IEntityUI<Order> orderUI)
+            , IEntityUI<Order> orderUI
+            , IRepository<Employee> seedRepository)
         {
             _employeeUI = employeeUI;
             _supplierUI = supplierUI;
             _supplyUI = supplyUI;
             _dishUI = dishUI;
             _orderUI = orderUI;
+            _seedRepository = seedRepository;
         }
 
         public void MainMenuUI<T>(IEntityUI<T> entityUI)
@@ -81,7 +85,6 @@ namespace RestaurantApp.Components.UI
 
         public void InitializeUI()
         {
-
             Console.WriteLine();
             Console.WriteLine("---   Welcome!   ---");
             Console.WriteLine();
@@ -157,6 +160,6 @@ namespace RestaurantApp.Components.UI
             where T : class, IEntity
         {
             entityComm.Update();
-        }
+        }     
     }
 }
