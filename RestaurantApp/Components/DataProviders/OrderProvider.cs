@@ -90,14 +90,14 @@ namespace RestaurantApp.Components.DataProviders
         public List<Order>? GetCompletedOrders()
         {
             return _orderRepository.GetAll()
-                .Where(p => p.Status == Enum.GetName(typeof(OrderStatuses), 1))
+                .Where(p => p.Status == Enum.GetName(typeof(OrderStatus), 1))
                 .ToList();
         }
 
         public List<Order>? GetUncompletedOrders()
         {
             return _orderRepository.GetAll()
-                .Where(p => p.Status != Enum.GetName(typeof(OrderStatuses), 1))
+                .Where(p => p.Status != Enum.GetName(typeof(OrderStatus), 1))
                 .ToList();
         }
 

@@ -36,32 +36,92 @@ public class Application : IApplication
         var supplyRepo = new SqlRepository<Supply>(context);
         var orderRepo = new OrderRepository(context);
         var dishesRepo = new DishRepository(context);
-        SeedEmployees(empRepo);
-        SeedSuppliers(supplierRepo);
-        SeedSupplies(seedDate, supplyRepo);
-        SeedOrders(seedDate, orderRepo);
-        SeedDishes(dishesRepo);
+        SeedEmployees(empRepo, context);
+        SeedSuppliers(supplierRepo, context);
+        SeedSupplies(seedDate, supplyRepo, context);
+        SeedDishes(dishesRepo, context);
+        SeedOrders(seedDate, orderRepo, context);
+
 
     }
 
 
-    private void SeedDishes(DishRepository dishesRepo)
+    private void SeedDishes(DishRepository dishesRepo, RestaurantAppDbContext context)
     {
-        dishesRepo.Add(new Dish { Name = "MeatBomb" });
-        dishesRepo.Add(new Dish { Name = "Ricerini" });
-        dishesRepo.Add(new Dish { Name = "SpiceBag" });
-        dishesRepo.Add(new Dish { Name = "OatyGoodness" });
-        dishesRepo.Add(new Dish { Name = "OhMyGroat" });
+        dishesRepo.Add(new Dish
+        {
+            Name = "MeatBomb",
+            Supplies = new List<Supply>()
+        {
+        context.Supplies.Find(1),
+        context.Supplies.Find(2),
+        context.Supplies.Find(5),
+        context.Supplies.Find(9),
+        }
+        });
+        dishesRepo.Add(new Dish
+        {
+            Name = "Ricerini",
+            Supplies = new List<Supply>()
+        {
+        context.Supplies.Find(3),
+        context.Supplies.Find(6),
+        context.Supplies.Find(7),
+        context.Supplies.Find(10),
+        }
+        });
+        dishesRepo.Add(new Dish
+        {
+            Name = "SpiceBag",
+            Supplies = new List<Supply>()
+        {
+        context.Supplies.Find(4),
+        context.Supplies.Find(5),
+        context.Supplies.Find(9),
+        context.Supplies.Find(10),
+        context.Supplies.Find(11)
+        }
+        });
+        dishesRepo.Add(new Dish
+        {
+            Name = "OatyGoodness",
+            Supplies = new List<Supply>()
+        {
+        context.Supplies.Find(7),
+        context.Supplies.Find(8),
+        context.Supplies.Find(9),
+        context.Supplies.Find(10)
+        }
+        });
+        dishesRepo.Add(new Dish
+        {
+            Name = "OhMyGroat",
+            Supplies = new List<Supply>()
+        {
+        context.Supplies.Find(5),
+        context.Supplies.Find(6),
+        context.Supplies.Find(7),
+        context.Supplies.Find(8),
+         context.Supplies.Find(9)
+        }
+        });
+        context.SaveChanges();
     }
 
-    private void SeedOrders(string seedDate, OrderRepository orderRepo)
+    private void SeedOrders(string seedDate, OrderRepository orderRepo, RestaurantAppDbContext context)
     {
         orderRepo.Add(new Order
         {
             Status = OrderStatus.Uncompleted.ToString(),
             ToGo = true,
             OrderDateTime = BaseEntityUI<IEntity>.ParseStringToDateTime(seedDate),
-            EmployeeId = 1
+            EmployeeId = 1,
+            Dishes = new List<Dish>()
+            {
+                context.Dishes.Find(1),
+                context.Dishes.Find(1),
+                context.Dishes.Find(2),
+            }
         });
 
         orderRepo.Add(new Order
@@ -69,7 +129,13 @@ public class Application : IApplication
             Status = OrderStatus.Completed.ToString(),
             ToGo = false,
             OrderDateTime = BaseEntityUI<IEntity>.ParseStringToDateTime(seedDate),
-            EmployeeId = 2
+            EmployeeId = 2,
+            Dishes = new List<Dish>()
+            {
+                context.Dishes.Find(3),
+                context.Dishes.Find(5),
+                context.Dishes.Find(2),
+            }
         });
 
         orderRepo.Add(new Order
@@ -77,7 +143,13 @@ public class Application : IApplication
             Status = OrderStatus.Canceled.ToString(),
             ToGo = true,
             OrderDateTime = BaseEntityUI<IEntity>.ParseStringToDateTime(seedDate),
-            EmployeeId = 2
+            EmployeeId = 2,
+            Dishes = new List<Dish>()
+            {
+                context.Dishes.Find(3),
+                context.Dishes.Find(3),
+                context.Dishes.Find(2),
+            }
         });
 
         orderRepo.Add(new Order
@@ -85,7 +157,13 @@ public class Application : IApplication
             Status = OrderStatus.Uncompleted.ToString(),
             ToGo = false,
             OrderDateTime = BaseEntityUI<IEntity>.ParseStringToDateTime(seedDate),
-            EmployeeId = null
+            EmployeeId = null,
+            Dishes = new List<Dish>()
+            {
+                context.Dishes.Find(1),
+                context.Dishes.Find(4),
+                context.Dishes.Find(2),
+            }
         });
 
         orderRepo.Add(new Order
@@ -93,16 +171,24 @@ public class Application : IApplication
             Status = OrderStatus.Completed.ToString(),
             ToGo = true,
             OrderDateTime = BaseEntityUI<IEntity>.ParseStringToDateTime(seedDate),
-            EmployeeId = 1
+            EmployeeId = 1,
+            Dishes = new List<Dish>()
+            {
+                context.Dishes.Find(4),
+                context.Dishes.Find(2),
+                context.Dishes.Find(2),
+            }
         });
+        context.SaveChanges();
     }
 
-    private void SeedSupplies(string seedDate, SqlRepository<Supply> supplyRepo)
+    private void SeedSupplies(string seedDate, SqlRepository<Supply> supplyRepo, RestaurantAppDbContext context)
     {
         SeedSupplies_Meat(seedDate, supplyRepo);
         SeedSupplies_Groats(seedDate, supplyRepo);
         SeedSupplies_Sanitation(seedDate, supplyRepo);
         SeedSupplies_Spices(seedDate, supplyRepo);
+        context.SaveChanges();
     }
 
     private void SeedSupplies_Spices(string seedDate, SqlRepository<Supply> supplyRepo)
@@ -228,20 +314,22 @@ public class Application : IApplication
         });
     }
 
-    private void SeedEmployees(EmployeeRepository empRepo)
+    private void SeedEmployees(EmployeeRepository empRepo, RestaurantAppDbContext context)
     {
         empRepo.Add(new Employee { FirstName = "Bob", LastName = "Bobby", Role = EmployeeRole.Employee.ToString() });
         empRepo.Add(new Employee { FirstName = "Josh", LastName = "Joshy", Role = EmployeeRole.Employee.ToString() });
         empRepo.Add(new Employee { FirstName = "Meg", LastName = "Meggy", Role = EmployeeRole.Manager.ToString() });
         empRepo.Add(new Employee { FirstName = "Martha", LastName = "Marthens", Role = EmployeeRole.Cashier.ToString() });
+        context.SaveChanges();
     }
 
-    private void SeedSuppliers(SupplierRepository supplierRepo)
+    private void SeedSuppliers(SupplierRepository supplierRepo, RestaurantAppDbContext context)
     {
         supplierRepo.Add(new Supplier { Name = "Meatto", SupplyCategory = SupplyCategory.Meat.ToString() });
         supplierRepo.Add(new Supplier { Name = "Ricee", SupplyCategory = SupplyCategory.Groats.ToString() });
         supplierRepo.Add(new Supplier { Name = "Cleany", SupplyCategory = SupplyCategory.Sanitation.ToString() });
         supplierRepo.Add(new Supplier { Name = "Spicy", SupplyCategory = SupplyCategory.Spices.ToString() });
+        context.SaveChanges();
     }
 
     private void SeedSupplies_Meat(string seedDate, SqlRepository<Supply> supplyRepo)

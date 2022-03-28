@@ -22,7 +22,7 @@ namespace RestaurantApp.Components.DataProviders
         {
             return _supplyRepository.GetAll().
                 GroupBy(x => x.Category)
-                .Where(p => p.Key != Enum.GetName(typeof(SupplyCategories), 6) && p.Key != Enum.GetName(typeof(SupplyCategories), 7))
+                .Where(p => p.Key != Enum.GetName(typeof(SupplyCategory), 6) && p.Key != Enum.GetName(typeof(SupplyCategory), 7))
                 .ToList();
         }
 

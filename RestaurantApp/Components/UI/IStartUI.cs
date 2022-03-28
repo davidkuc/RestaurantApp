@@ -25,9 +25,6 @@ namespace RestaurantApp.Components.UI
             where T : class,IEntity;
 
         void DeleteEntityUI<T>(IEntityUI<T> entityComm)
-            where T : class, IEntity;
-
-        void SeedDB();
-   
+            where T : class, IEntity;  
     }
 }
