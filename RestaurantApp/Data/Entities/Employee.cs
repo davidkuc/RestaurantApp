@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestaurantApp.Data.Entities;
+using RestaurantApp.Data.Entities.Enums;
 
 namespace RestaurantApp.Data.Entities
 {
@@ -12,7 +13,7 @@ namespace RestaurantApp.Data.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public EmployeeRoles Role { get; set; }
+        public string Role { get; set; }
 
         public ICollection<Order>? Orders { get; set; }
 

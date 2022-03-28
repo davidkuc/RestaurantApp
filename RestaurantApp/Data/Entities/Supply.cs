@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestaurantApp.Data.Entities;
+using RestaurantApp.Data.Entities.Enums;
 
 namespace RestaurantApp.Data.Entities
 {
@@ -13,8 +14,8 @@ namespace RestaurantApp.Data.Entities
         public string Name { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public DateTime? PurchaseDate { get; set; }
-        public string? Category { get; set; }
-        public int? Quantity { get; set; }     
+        public string Category { get; set; }
+        public int? Quantity { get; set; }
         public int SupplierID { get; set; }
         public Supplier Supplier { get; set; }
 

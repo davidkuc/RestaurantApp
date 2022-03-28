@@ -56,11 +56,9 @@ namespace RestaurantApp.Components.UI.EntityUI
                     Console.WriteLine("Enter quantity");
                     var quantity = int.Parse(Console.ReadLine());
                     Console.WriteLine("Enter purchase date (DD-MM-YYYY)");
-                    DateTime purchaseDate;
-                    ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out purchaseDate);
+                    var purchaseDate = ParseStringToDateTime(input: Console.ReadLine());
                     Console.WriteLine("Enter expiration date (DD-MM-YYYY)");
-                    DateTime expirationDate;
-                    ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out expirationDate);
+                    var expirationDate = ParseStringToDateTime(input: Console.ReadLine());
                     var newSupply = CreateSupply(name: supplyName
                         , category: category
                         , quantity: quantity
@@ -327,17 +325,14 @@ namespace RestaurantApp.Components.UI.EntityUI
         private void UpdateSupplyPurchaseDate(Supply chosenSupply)
         {
             Console.WriteLine("Enter new purchase date");
-            DateTime newSupplyPurchDate;
-            ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out newSupplyPurchDate);
-            chosenSupply.PurchaseDate = newSupplyPurchDate;
+            chosenSupply.PurchaseDate = ParseStringToDateTime(input: Console.ReadLine());
         }
 
         private void UpdateSupplyExpirationDate(Supply chosenSupply)
         {
             Console.WriteLine("Enter new expiration date");
             DateTime newSupplyExpDate;
-            ParseStringToDateTime(input: Console.ReadLine(), dateTimeVariable: out newSupplyExpDate);
-            chosenSupply.ExpirationDate = newSupplyExpDate;
+            chosenSupply.ExpirationDate = ParseStringToDateTime(input: Console.ReadLine());
         }
 
         private void UpdateSupplyQuantity(Supply chosenSupply)
@@ -352,7 +347,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             Console.WriteLine("Enter category");
             DisplaySupplyCategories();
             var supplyCategoryNumber = Int32.Parse(Console.ReadLine());
-            var newSupplyCategory = Enum.GetName(typeof(SupplyCategories), supplyCategoryNumber);
+            var newSupplyCategory = Enum.GetName(typeof(SupplyCategory), supplyCategoryNumber);
             chosenSupply.Category = newSupplyCategory;
         }
 

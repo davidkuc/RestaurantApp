@@ -1,11 +1,12 @@
 ﻿using System.Text;
 using RestaurantApp.Data.Entities;
+using RestaurantApp.Data.Entities.Enums;
 
 namespace RestaurantApp.Data.Entities
 {
     public class Order : EntityBase
     {
-        public string? Status { get; set; }
+        public string Status { get; set; }
         public bool? ToGo { get; set; }
         public DateTime OrderDateTime { get; set; }
         public int? EmployeeId { get; set; }

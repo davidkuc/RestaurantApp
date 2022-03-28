@@ -129,52 +129,54 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         protected static void DisplayEmployeeRoles()
         {
-            var roles = Enum.GetNames(typeof(EmployeeRoles));
+            var roles = Enum.GetNames(typeof(EmployeeRole));
 
             Console.WriteLine();
             foreach (var item in roles)
             {
-                Console.WriteLine($"{(int)Enum.Parse(typeof(EmployeeRoles), item)} = {item} ");
+                Console.WriteLine($"{(int)Enum.Parse(typeof(EmployeeRole), item)} = {item} ");
             }
             Console.WriteLine();
         }
 
         protected static void DisplaySupplyCategories()
         {
-            var categories = Enum.GetNames(typeof(SupplyCategories));
+            var categories = Enum.GetNames(typeof(SupplyCategory));
 
             Console.WriteLine();
             foreach (var category in categories)
             {
-                Console.WriteLine($"{(int)Enum.Parse(typeof(SupplyCategories), category)} = {category} ");
+                Console.WriteLine($"{(int)Enum.Parse(typeof(SupplyCategory), category)} = {category} ");
             }
             Console.WriteLine();
         }
 
         protected static void DisplayOrderStatuses()
         {
-            var statuses = Enum.GetNames(typeof(OrderStatuses));
+            var statuses = Enum.GetNames(typeof(OrderStatus));
 
             Console.WriteLine();
             foreach (var status in statuses)
             {
-                Console.WriteLine($"{(int)Enum.Parse(typeof(OrderStatuses), status)} = {status} ");
+                Console.WriteLine($"{(int)Enum.Parse(typeof(OrderStatus), status)} = {status} ");
             }
             Console.WriteLine();
         }
 
-        protected static void ParseStringToDateTime(string input, out DateTime dateTimeVariable)
+        public static DateTime ParseStringToDateTime(string input)
         {
-            if (!DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
+            DateTime dt;
+            if (!DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out dt))
             {
                 Console.WriteLine($"Parsing failed - Invalid input, try again");
-                while (!DateTime.TryParseExact(Console.ReadLine(), "dd-MM-yyyy", null, DateTimeStyles.None, out dateTimeVariable))
+                while (!DateTime.TryParseExact(Console.ReadLine(), "dd-MM-yyyy", null, DateTimeStyles.None, out dt))
                 {
                     Console.WriteLine($"Parsing failed - Invalid input, try again");
                 }
             }
 
             Console.WriteLine("Date parsed correctly!");
+            return dt;
         }
 
         protected static T ChooseEntityByID<T>(IRepository<T> repository)

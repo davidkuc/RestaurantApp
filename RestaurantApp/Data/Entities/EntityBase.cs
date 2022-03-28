@@ -9,7 +9,7 @@ using RestaurantApp.Data.Entities;
 namespace RestaurantApp.Data.Entities
 {
     public class EntityBase : IEntity
-    {        
-        public int Id { get; set; }      
+    {
+        public int Id { get; set; }
     }
 }

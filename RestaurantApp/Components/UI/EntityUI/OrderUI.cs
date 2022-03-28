@@ -90,7 +90,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                     ToGo = isToGo,
                     OrderDateTime = DateTime.Now,
                     Dishes = dishCollection,
-                    Status = Enum.GetName(typeof(OrderStatuses), 1)
+                    Status = Enum.GetName(typeof(OrderStatus), 1)
                 };
 
             return newOrder;
@@ -361,7 +361,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             Console.WriteLine("Enter order status");
             DisplayOrderStatuses();
             var orderStatusNumber = Int32.Parse(Console.ReadLine());
-            var newOrderStatus = Enum.GetName(typeof(SupplyCategories), orderStatusNumber);
+            var newOrderStatus = Enum.GetName(typeof(SupplyCategory), orderStatusNumber);
             chosenEntity.Status = newOrderStatus;
         }
 

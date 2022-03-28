@@ -33,7 +33,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("Enter role number");
                 DisplayEmployeeRoles();
                 var roleNumber = Int32.Parse(Console.ReadLine());
-                var role = Enum.GetName(typeof(EmployeeRoles), roleNumber);
+                var role = Enum.GetName(typeof(EmployeeRole), roleNumber);
                 var newEmployee = CreateEmployee(firstName: firstName, lastName: lastName, role: role);
                 employeesToAdd.Add(newEmployee);
                 Console.WriteLine();
