@@ -2,16 +2,20 @@
 using RestaurantApp.Data.Entities.Enums;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
+using RestaurantApp.Components.DataProviders.Models;
 
 namespace RestaurantApp.Components.DataProviders
 {
     public class SupplyProvider : ISupplyProvider
     {
         private readonly IRepository<Supply> _supplyRepository;
+        private readonly IRepository<Supplier> _supplierRepository;
 
-        public SupplyProvider(IRepository<Supply> supplyRepository)
+        public SupplyProvider(IRepository<Supply> supplyRepository
+            , IRepository<Supplier> supplierRepository)
         {
             _supplyRepository = supplyRepository;
+            _supplierRepository = supplierRepository;
         }
 
         public List<IGrouping<string, Supply>>? GetIngredientsGroupedByCategory()
@@ -25,15 +29,22 @@ namespace RestaurantApp.Components.DataProviders
         public List<IGrouping<string?, Supply>>? GroupByCategory()
         {
             return _supplyRepository.GetAll()
-                .GroupBy(x => x.Category).
-                ToList();
+                .GroupBy(x => x.Category)
+                .ToList();
         }
 
-        public List<IGrouping<int, Supply>> GroupBySupplier()
+        public List<GroupedSupplies> GroupBySupplier()
         {
-            return _supplyRepository.GetAll()
-                .GroupBy(x => x.SupplierID)
-                .ToList(); 
+            return _supplierRepository.GetAll()
+                .GroupJoin(_supplyRepository.GetAll(),
+                supplier => supplier.Id,
+                supply => supply.SupplierID,
+                (supplier, supply) => new GroupedSupplies()
+                {
+                    SupplierName = supplier.Name,
+                    Supplies = supply
+                })
+                .ToList();
         }
 
         public List<Supply> SortByCategory()

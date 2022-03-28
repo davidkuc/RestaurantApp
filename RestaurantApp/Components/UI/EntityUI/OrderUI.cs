@@ -44,7 +44,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                 DisplayEmployees(_employeeRepository);
                 Console.WriteLine();
                 Console.WriteLine("Choose an employee handling the order (or null)");
-                int? employeeID = Int32.Parse(Console.ReadLine());
+                int? employeeID = int.Parse(Console.ReadLine());
                 Console.WriteLine("Is the order To Go? (Y/N)");
                 bool isToGo;
                 var isToGoChoice = Console.ReadLine();
@@ -105,8 +105,8 @@ namespace RestaurantApp.Components.UI.EntityUI
 
             while (true)
             {
-                var chosenDish = ChooseEntityByID(_dishRepository);
-                dishCollection.Add(chosenDish);
+                var chosenDishId = CheckIfEntityExistsByID(_dishRepository);
+                dishCollection.Add(_dishRepository.GetById(chosenDishId));
 
                 Console.WriteLine("1 - Add more dishes");
                 Console.WriteLine("q - exit");

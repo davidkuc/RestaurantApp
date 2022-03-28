@@ -1,4 +1,5 @@
-﻿using RestaurantApp.Data.Entities;
+﻿using RestaurantApp.Components.DataProviders.Models;
+using RestaurantApp.Data.Entities;
 
 namespace RestaurantApp.Components.DataProviders
 {
@@ -6,7 +7,7 @@ namespace RestaurantApp.Components.DataProviders
     {
         List<IGrouping<string?, Supply>>? GroupByCategory();
 
-        List<IGrouping<int, Supply>>? GroupBySupplier();
+        List<GroupedSupplies>? GroupBySupplier();
 
         List<Supply>? SortByCategory();
 

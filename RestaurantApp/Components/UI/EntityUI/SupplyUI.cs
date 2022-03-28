@@ -104,6 +104,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                 SupplierID = supplierID
             };
 
+
             return newSupply;
         }
 
@@ -116,8 +117,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplaySupplies(_baseRepository);
-                var supplyToDelete = ChooseEntityByID(_baseRepository);
-                suppliesToDelete.Add(supplyToDelete);
+                var supplyToDeleteId = CheckIfEntityExistsByID(_baseRepository);
+                suppliesToDelete.Add(_baseRepository.GetById(supplyToDeleteId));
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another supply to delete list");
                 Console.WriteLine("q - exit");
@@ -228,10 +229,10 @@ namespace RestaurantApp.Components.UI.EntityUI
             foreach (var group in groupedSupplies)
             {
                 Console.WriteLine();
-                Console.WriteLine(group.Key);
-                foreach (var supply in group)
+                Console.WriteLine(group.SupplierName);
+                foreach (var supply in group.Supplies)
                 {
-                    Console.WriteLine(supply.ToString);
+                    Console.WriteLine(supply.ToString());
                 }
             }
         }
@@ -243,17 +244,18 @@ namespace RestaurantApp.Components.UI.EntityUI
             {
                 Console.WriteLine();
                 Console.WriteLine(group.Key);
+
                 foreach (var supply in group)
                 {
-                    Console.WriteLine(supply.ToString);
+                    Console.WriteLine(supply.ToString());
                 }
             }
         }
 
         private void DisplaySupplyInfo()
         {
-            var chosenSupply = ChooseEntityByID(_baseRepository);
-            Console.WriteLine(chosenSupply.ToString());
+            var chosenSupplyId = CheckIfEntityExistsByID(_baseRepository);
+            Console.WriteLine(_baseRepository.GetById(chosenSupplyId).ToString());
         }
 
         public override void Update()
@@ -264,7 +266,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplaySupplies(_baseRepository);
-                var chosenSupply = ChooseEntityByID(_baseRepository);
+                var chosenSupplyId = CheckIfEntityExistsByID(_baseRepository);
+                var chosenSupply = _baseRepository.GetById(chosenSupplyId);
                 Console.WriteLine();
                 Console.WriteLine("What data do you wish to modify?");
                 Console.WriteLine("1 - Name");
@@ -283,6 +286,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                     return;
                 }
                 else
+
                 {
                     switch (updateSupplyChoice)
                     {
@@ -320,7 +324,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupply.SupplierID = newSupplierID;
         }
 
-        private static void UpdateSupplyPurchaseDate(Supply chosenSupply)
+        private void UpdateSupplyPurchaseDate(Supply chosenSupply)
         {
             Console.WriteLine("Enter new purchase date");
             DateTime newSupplyPurchDate;
@@ -328,7 +332,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupply.PurchaseDate = newSupplyPurchDate;
         }
 
-        private static void UpdateSupplyExpirationDate(Supply chosenSupply)
+        private void UpdateSupplyExpirationDate(Supply chosenSupply)
         {
             Console.WriteLine("Enter new expiration date");
             DateTime newSupplyExpDate;
@@ -336,7 +340,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             chosenSupply.ExpirationDate = newSupplyExpDate;
         }
 
-        private static void UpdateSupplyQuantity(Supply chosenSupply)
+        private void UpdateSupplyQuantity(Supply chosenSupply)
         {
             Console.WriteLine("Enter new quantity");
             var newSupplyQuantity = Int32.Parse(Console.ReadLine());
