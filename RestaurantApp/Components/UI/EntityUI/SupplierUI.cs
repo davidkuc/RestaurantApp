@@ -76,7 +76,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplaySuppliers(_baseRepository);
-                var supplierToDelete = ChooseEntityByID(_baseRepository);
+                var supplierToDelete = _baseRepository.GetById(CheckIfEntityExistsByID(_baseRepository));
                 suppliersToDelete.Add(supplierToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another supplier to delete list");
@@ -160,7 +160,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         private void DisplaySuppliesFromChosenSupplier()
         {
             Console.WriteLine("Enter supply Id");
-            var supplyID = Int32.Parse(Console.ReadLine());
+            var supplyID = int.Parse(Console.ReadLine());
             var supplierSupplies = _provider.GetSupplies(supplyID);
             foreach (var item in supplierSupplies)
             {
@@ -187,12 +187,12 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("What data do you wish to modify?");
                 Console.WriteLine("1 - Firm name");
                 Console.WriteLine("2 - Supply category");
-                Console.WriteLine("3 - Exit");
+                Console.WriteLine("q - Exit");
                 Console.WriteLine();
 
                 var modifySupplierMenuChoice = Console.ReadLine();
 
-                if (modifySupplierMenuChoice == "3")
+                if (modifySupplierMenuChoice == "q")
                 {
                     return;
                 }

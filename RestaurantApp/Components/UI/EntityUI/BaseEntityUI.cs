@@ -181,18 +181,18 @@ namespace RestaurantApp.Components.UI.EntityUI
             where T : class, IEntity
         {
             Console.WriteLine("Choose entity by Id");
-            Console.WriteLine("2 - exit");
+            Console.WriteLine("q - exit");
             Console.WriteLine();
             try
             {
-                var entityID = Int32.Parse(Console.ReadLine());
+                var entityID = Console.ReadLine();
                 Console.WriteLine();
-                Console.WriteLine("2 - exit");
-                if (entityID == 2)
+                Console.WriteLine("q - exit");
+                if (entityID == "q")
                 {
                     return null;
                 }
-                var chosenEntity = repository.GetById(entityID);
+                var chosenEntity = repository.GetById(int.Parse(entityID));
                 return chosenEntity;
             }
             catch (FormatException)
@@ -204,36 +204,44 @@ namespace RestaurantApp.Components.UI.EntityUI
             return null;
         }
 
-        protected void CheckIfEntityExistsByID(IRepository<T> repository, out int entityId)
+        protected int CheckIfEntityExistsByID<T>(IRepository<T> repository)
+            where T : class, IEntity
         {
-
-            var inputId = int.Parse(Console.ReadLine());
-            if (repository.GetById(inputId) == null)
+            try
             {
-                Console.WriteLine($"Entity at ID {inputId} does not exist");
-                int correctedId;
-                while (true)
+                var inputId = int.Parse(Console.ReadLine());
+                if (repository.GetById(inputId) == null)
                 {
-                    correctedId = int.Parse(Console.ReadLine());
-                    if (repository.GetById(correctedId) == null)
+                    Console.WriteLine($"Entity at ID {inputId} does not exist");
+                    int correctedId;
+                    while (true)
                     {
-                        Console.WriteLine($"Entity at ID {correctedId} does not exist");
+                        correctedId = int.Parse(Console.ReadLine());
+                        if (repository.GetById(correctedId) == null)
+                        {
+                            Console.WriteLine($"Entity at ID {correctedId} does not exist");
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        break;
-                    }
+
+                    Console.WriteLine($"Entity at ID {correctedId} found!");
+                    return correctedId;
                 }
-
-                Console.WriteLine($"Entity at ID {correctedId} found!");
-                entityId = correctedId;
+                else
+                {
+                    Console.WriteLine($"Entity at ID {inputId} found!");
+                    return inputId;
+                }
             }
-            else
+            catch (FormatException)
             {
-                Console.WriteLine($"Entity at ID {inputId} found!");
-                entityId = inputId;
-            }
 
+                Console.WriteLine("Invalid input - try again");
+                return CheckIfEntityExistsByID(repository);
+            }
         }
     }
 }

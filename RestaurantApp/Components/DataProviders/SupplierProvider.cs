@@ -16,9 +16,9 @@ namespace RestaurantApp.Components.DataProviders
 
         public List<Supply>? GetSupplies(int id)
         {
-            return _supplierRepository.GetAll()
+            return _supplierRepository.GetAll()?
                 .SingleOrDefault(p => p.Id == id)
-                .Supplies.ToList();
+                .Supplies?.ToList();
         }
 
         public List<IGrouping<string?, Supplier>> GroupByCategory()

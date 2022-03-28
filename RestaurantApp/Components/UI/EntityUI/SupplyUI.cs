@@ -46,9 +46,9 @@ namespace RestaurantApp.Components.UI.EntityUI
                 }
                 try
                 {
+
                     Console.WriteLine();
-                    int supplySupplierID;
-                    CheckIfEntityExistsByID(_baseRepository, out supplySupplierID);
+                    int supplySupplierID = CheckIfEntityExistsByID(_supplierRepository);
                     Console.WriteLine("Enter supply name");
                     var supplyName = Console.ReadLine();
                     Console.WriteLine("Enter supply category");
