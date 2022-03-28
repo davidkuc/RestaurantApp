@@ -24,7 +24,6 @@ public class Application : IApplication
         }
 
         _userInterface.InitializeUI();
-
     }
 
     private void SeedDB(RestaurantAppDbContext context)
@@ -44,7 +43,6 @@ public class Application : IApplication
 
 
     }
-
 
     private void SeedDishes(DishRepository dishesRepo, RestaurantAppDbContext context)
     {
