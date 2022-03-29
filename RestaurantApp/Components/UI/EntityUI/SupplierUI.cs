@@ -76,7 +76,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplaySuppliers(_baseRepository);
-                var supplierToDelete = _baseRepository.GetById(CheckIfEntityExistsByID(_baseRepository));
+                var supplierToDeleteId = CheckIfEntityExistsByID(_baseRepository);
+                var supplierToDelete = _baseRepository.GetById(supplierToDeleteId);
                 suppliersToDelete.Add(supplierToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another supplier to delete list");
@@ -170,7 +171,8 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         private void DisplaySupplierInfo()
         {
-            var chosenSupplier = ChooseEntityByID(_baseRepository);
+            var chosenSupplierId = CheckIfEntityExistsByID(_baseRepository);
+            var chosenSupplier = _baseRepository.GetById(chosenSupplierId);
             Console.WriteLine(chosenSupplier.ToString());
         }
 
@@ -182,7 +184,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplaySuppliers(_baseRepository);
-                var chosenSupplier = ChooseEntityByID(_baseRepository);
+                var chosenSupplierId = CheckIfEntityExistsByID(_baseRepository);
+                var chosenSupplier = _baseRepository.GetById(chosenSupplierId);
                 Console.WriteLine();
                 Console.WriteLine("What data do you wish to modify?");
                 Console.WriteLine("1 - Firm name");
