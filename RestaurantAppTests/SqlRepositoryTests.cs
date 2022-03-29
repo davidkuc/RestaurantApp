@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RestaurantApp.Data.Entities;
 using RestaurantApp.Data.Repositories;
+using RestaurantApp.Data.Entities.Enums;
 
 namespace RestaurantAppTests
 {
@@ -51,12 +52,12 @@ namespace RestaurantAppTests
         public void GetById_ReturnsProperItems()
         {
 
-            expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
-            expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2 });
-            expectedEmpList.Add(new Employee { FirstName = "Charlie", LastName = "C", Id = 3 });
-            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "B" });
-            employeeRepo.Add(new Employee { FirstName = "Bart", LastName = "A" });
-            employeeRepo.Add(new Employee { FirstName = "Charlie", LastName = "C" });
+            expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1, Role = EmployeeRole.Employee.ToString() });
+            expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2, Role = EmployeeRole.Employee.ToString() });
+            expectedEmpList.Add(new Employee { FirstName = "Charlie", LastName = "C", Id = 3, Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "B", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Bart", LastName = "A", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Charlie", LastName = "C", Role = EmployeeRole.Employee.ToString() });
             employeeRepo.Save();
 
             for (int i = 1; i < expectedEmpList.Count; i++)
@@ -75,10 +76,10 @@ namespace RestaurantAppTests
         public void Add_AddsProperItemToDb()
         {
 
-            expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Id = 1 });
-            expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Id = 2 });
-            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "B" });
-            employeeRepo.Add(new Employee { FirstName = "Bart", LastName = "A" });
+            expectedEmpList.Add(new Employee { FirstName = "Adam", LastName = "B", Role = EmployeeRole.Employee.ToString(), Id = 1 });
+            expectedEmpList.Add(new Employee { FirstName = "Bart", LastName = "A", Role = EmployeeRole.Employee.ToString(), Id = 2 });
+            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "B", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Bart", LastName = "A", Role = EmployeeRole.Employee.ToString() });
             employeeRepo.Save();
 
             for (int i = 1; i < expectedEmpList.Count; i++)
@@ -99,15 +100,15 @@ namespace RestaurantAppTests
 
             var employeeCount = 0;
             expectedEmpList.Add(null);
-            expectedEmpList.Add(new Employee { FirstName = "Francis", LastName = "A", Id = 2 });
-            expectedEmpList.Add(new Employee { FirstName = "Meg", LastName = "A", Id = 3 });
-            expectedEmpList.Add(new Employee { FirstName = "Dick", LastName = "A", Id = 4 });
+            expectedEmpList.Add(new Employee { FirstName = "Francis", LastName = "A", Id = 2, Role = EmployeeRole.Employee.ToString() });
+            expectedEmpList.Add(new Employee { FirstName = "Meg", LastName = "A", Id = 3, Role = EmployeeRole.Employee.ToString() });
+            expectedEmpList.Add(new Employee { FirstName = "Dick", LastName = "A", Id = 4, Role = EmployeeRole.Employee.ToString() });
             expectedEmpList.Add(null);
-            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "A" });
-            employeeRepo.Add(new Employee { FirstName = "Francis", LastName = "A" });
-            employeeRepo.Add(new Employee { FirstName = "Meg", LastName = "A" });
-            employeeRepo.Add(new Employee { FirstName = "Dick", LastName = "A" });
-            employeeRepo.Add(new Employee { FirstName = "Kurt", LastName = "A" });
+            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "A", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Francis", LastName = "A", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Meg", LastName = "A", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Dick", LastName = "A", Role = EmployeeRole.Employee.ToString() });
+            employeeRepo.Add(new Employee { FirstName = "Kurt", LastName = "A", Role = EmployeeRole.Employee.ToString() });
 
             employeeRepo.Remove(employeeRepo.GetById(1));
             employeeRepo.Remove(employeeRepo.GetById(5));
@@ -135,9 +136,9 @@ namespace RestaurantAppTests
         [TestCategory("WithoutException")]
         public void Update_UpdatesEntityData()
         {
-            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "A" });
+            employeeRepo.Add(new Employee { FirstName = "Adam", LastName = "A", Role = EmployeeRole.Employee.ToString() });
             employeeRepo.Save();
-            var expectedEmployee = new Employee { FirstName = "Bart", LastName = "B", Id = 1 };
+            var expectedEmployee = new Employee { FirstName = "Bart", LastName = "B", Id = 1, Role = EmployeeRole.Employee.ToString() };
             var employeeToUpdate = employeeRepo.GetById(1);
 
             employeeToUpdate.FirstName = "Bart";
