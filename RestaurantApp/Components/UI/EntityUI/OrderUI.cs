@@ -46,25 +46,14 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine("Choose an employee handling the order (or null)");
                 int? employeeID = int.Parse(Console.ReadLine());
                 Console.WriteLine("Is the order To Go? (Y/N)");
-                bool isToGo;
-                var isToGoChoice = Console.ReadLine();
-                if (isToGoChoice == "Y")
-                {
-                    isToGo = true;
-                }
-                else if (isToGoChoice == "N")
-                {
-                    isToGo = false;
-                }
-                else
-                {
-                    throw new InvalidInputException("Enter Y or N");
-                }
-
+                bool isToGo = ValidateToGo(Console.ReadLine());
                 var dishCollection = ChooseDishes();
-                var newOrder = CreateOrder(employeeID: employeeID
-                    ,isToGo: isToGo
-                    ,dishCollection: dishCollection);              
+                var newOrder = CreateOrder
+                    (
+                    employeeID: employeeID
+                    , isToGo: isToGo
+                    , dishCollection: dishCollection
+                    );
                 ordersToAdd.Add(newOrder);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another order");
@@ -82,16 +71,40 @@ namespace RestaurantApp.Components.UI.EntityUI
             return ordersToAdd;
         }
 
+        private bool ValidateToGo(string input)
+        {
+            var inputToUpper = input.ToUpper();
+            try
+            {
+                switch (inputToUpper)
+                {
+                    case "Y":
+                        return true;
+                    case "N":
+                        return false;
+                    default:
+                        Console.WriteLine("Invalid input - try again");
+                        return ValidateToGo(Console.ReadLine());
+                        break;
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input - try again");
+                return ValidateToGo(Console.ReadLine());
+            }
+        }
+
         private Order CreateOrder(int? employeeID, bool isToGo, ICollection<Dish> dishCollection)
         {
             var newOrder = new Order
-                {
-                    EmployeeId = employeeID,
-                    ToGo = isToGo,
-                    OrderDateTime = DateTime.Now,
-                    Dishes = dishCollection,
-                    Status = Enum.GetName(typeof(OrderStatus), 1)
-                };
+            {
+                EmployeeId = employeeID,
+                ToGo = isToGo,
+                OrderDateTime = DateTime.Now,
+                Dishes = dishCollection,
+                Status = Enum.GetName(typeof(OrderStatus), 1)
+            };
 
             return newOrder;
         }
@@ -360,7 +373,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         {
             Console.WriteLine("Enter order status");
             DisplayOrderStatuses();
-            var orderStatusNumber = Int32.Parse(Console.ReadLine());
+            var orderStatusNumber = int.Parse(Console.ReadLine());
             var newOrderStatus = Enum.GetName(typeof(SupplyCategory), orderStatusNumber);
             chosenEntity.Status = newOrderStatus;
         }
@@ -368,7 +381,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         private void UpdateOrderEmployeeID(Order chosenEntity)
         {
             Console.WriteLine("Enter employee ID");
-            var newEmployeeID = Int32.Parse(Console.ReadLine());
+            var newEmployeeID = int.Parse(Console.ReadLine());
             chosenEntity.EmployeeId = newEmployeeID;
         }
 
