@@ -222,7 +222,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             var dishesBelowValue = _provider.DishesBelowValue(maxValue);
             foreach (var dish in dishesBelowValue)
             {
-                Console.WriteLine(dish.ToString);
+                Console.WriteLine(dish.ToString());
             }
         }
 
@@ -233,7 +233,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             var dishesAboveValue = _provider.DishesAboveValue(minValue);
             foreach (var dish in dishesAboveValue)
             {
-                Console.WriteLine(dish.ToString);
+                Console.WriteLine(dish.ToString());
             }
         }
 

@@ -161,7 +161,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                 Console.WriteLine(group.Key);
                 foreach (var employee in group)
                 {
-                    Console.WriteLine(employee.ToString);
+                    Console.WriteLine(employee.ToString());
                 }
             }
         }
@@ -169,11 +169,11 @@ namespace RestaurantApp.Components.UI.EntityUI
         private void DisplayEmployeeOrders()
         {
             Console.WriteLine("Enter employee Id");
-            var employeeID = Int32.Parse(Console.ReadLine());
+            var employeeID = int.Parse(Console.ReadLine());
             var employeeOrders = _provider.GetEmployeeOrders(employeeID);
             foreach (var item in employeeOrders)
             {
-                Console.WriteLine(item.ToString);
+                Console.WriteLine(item.ToString());
             }
         }
 

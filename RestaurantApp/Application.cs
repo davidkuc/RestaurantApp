@@ -40,8 +40,6 @@ public class Application : IApplication
         SeedSupplies(seedDate, supplyRepo, context);
         SeedDishes(dishesRepo, context);
         SeedOrders(seedDate, orderRepo, context);
-
-
     }
 
     private void SeedDishes(DishRepository dishesRepo, RestaurantAppDbContext context)
