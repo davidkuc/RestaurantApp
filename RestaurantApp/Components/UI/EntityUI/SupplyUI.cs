@@ -46,13 +46,12 @@ namespace RestaurantApp.Components.UI.EntityUI
                 }
                 try
                 {
-
                     Console.WriteLine();
                     int supplySupplierID = CheckIfEntityExistsByID(_supplierRepository);
                     Console.WriteLine("Enter supply name");
                     var supplyName = Console.ReadLine();
                     Console.WriteLine("Enter supply category");
-                    var category = Console.ReadLine();
+                    var category = ValidateSupplyCategory(Console.ReadLine());
                     Console.WriteLine("Enter quantity");
                     var quantity = int.Parse(Console.ReadLine());
                     Console.WriteLine("Enter purchase date (DD-MM-YYYY)");

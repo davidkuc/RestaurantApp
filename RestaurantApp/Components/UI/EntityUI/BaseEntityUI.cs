@@ -218,5 +218,34 @@ namespace RestaurantApp.Components.UI.EntityUI
                 return CheckIfEntityExistsByID(repository);
             }
         }
+
+        protected string ValidateSupplyCategory(string input)
+        {
+            var enumCount = Enum.GetValues(typeof(SupplyCategory)).Length - 1;
+            int enumId = 0;
+            try
+            {
+                enumId = int.Parse(input);
+                if (enumId > enumCount || enumId < enumCount)
+                {
+                    Console.WriteLine("Invalid input - try again");
+                    while (true)
+                    {
+                        enumId = int.Parse(Console.ReadLine());
+                        if (!(enumId > enumCount && enumId < enumCount))
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Invalid input - try again");
+                    }
+                }
+                return Enum.GetName(typeof(SupplyCategory), enumId);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Invalid input - try again");
+                return ValidateSupplyCategory(Console.ReadLine());
+            }
+        }
     }
 }

@@ -32,8 +32,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                 var lastName = Console.ReadLine();
                 Console.WriteLine("Enter role number");
                 DisplayEmployeeRoles();
-                var roleNumber = Int32.Parse(Console.ReadLine());
-                var role = Enum.GetName(typeof(EmployeeRole), roleNumber);
+                var role = ValidateEnumId(Console.ReadLine());
                 var newEmployee = CreateEmployee(firstName: firstName, lastName: lastName, role: role);
                 employeesToAdd.Add(newEmployee);
                 Console.WriteLine();
@@ -238,7 +237,7 @@ namespace RestaurantApp.Components.UI.EntityUI
             }
         }
 
-        private int ValidateEnumId(string enumIdStr)
+        private string ValidateEnumId(string enumIdStr)
         {
             var enumCount = Enum.GetValues(typeof(EmployeeRole)).Length - 1;
             int enumId = 0;
@@ -258,7 +257,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                         Console.WriteLine("Invalid enum ID - try again");
                     }
                 }
-                return enumId;
+                return Enum.GetName(typeof(EmployeeRole), enumId);
             }
             catch (FormatException)
             {

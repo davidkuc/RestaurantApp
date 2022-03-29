@@ -36,9 +36,8 @@ namespace RestaurantApp.Components.UI.EntityUI
                 var firmName = Console.ReadLine();
                 Console.WriteLine("Enter supply category ID");
                 DisplaySupplyCategories();
-                var supplyCategoryNumber = Int32.Parse(Console.ReadLine());
-                var supplyCategory = Enum.GetName(typeof(SupplyCategory), supplyCategoryNumber);
-                var newSupplier = CreateSupplier(firmName: firmName, supplyCategory: supplyCategory);             
+                var supplyCategory = ValidateSupplyCategory(Console.ReadLine());
+                var newSupplier = CreateSupplier(firmName: firmName, supplyCategory: supplyCategory);
                 suppliersToAdd.Add(newSupplier);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another supplier");
@@ -54,15 +53,15 @@ namespace RestaurantApp.Components.UI.EntityUI
 
             RepositoryExtensions.AddBatch(_baseRepository, suppliersToAdd);
             return suppliersToAdd;
-        }
+        }    
 
         private Supplier CreateSupplier(string firmName, string supplyCategory)
         {
-             var newSupplier = new Supplier
-                {
-                    Name = firmName,
-                    SupplyCategory = supplyCategory,
-                };
+            var newSupplier = new Supplier
+            {
+                Name = firmName,
+                SupplyCategory = supplyCategory,
+            };
 
             return newSupplier;
         }
