@@ -14,7 +14,6 @@ namespace RestaurantAppTests
     public class SupplierRepositoryTests : TestBase
     {
         private List<Supply> expectedSupplyList;
-        private List<Supplier> expectedSupplierList;
         private SupplierRepository supplierRepo;
         private SqlRepository<Supply> supplyRepo;
 
@@ -33,7 +32,6 @@ namespace RestaurantAppTests
         public void TestInitialize()
         {
             dbContext = new RestaurantAppTestsDbContext();
-            expectedSupplierList = new List<Supplier>();
             expectedSupplyList = new List<Supply>();
             supplierRepo = new SupplierRepository(dbContext);
             supplyRepo = new SqlRepository<Supply>(dbContext);
