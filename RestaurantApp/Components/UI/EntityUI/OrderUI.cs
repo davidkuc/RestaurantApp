@@ -85,7 +85,6 @@ namespace RestaurantApp.Components.UI.EntityUI
                     default:
                         Console.WriteLine("Invalid input - try again");
                         return ValidateToGo(Console.ReadLine());
-                        break;
                 }
             }
             catch (FormatException)
@@ -120,10 +119,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             {
                 var chosenDishId = CheckIfEntityExistsByID(_dishRepository);
                 dishCollection.Add(_dishRepository.GetById(chosenDishId));
-
                 Console.WriteLine("1 - Add more dishes");
                 Console.WriteLine("q - exit");
-
                 var chooseDishesChoice = Console.ReadLine();
                 if (chooseDishesChoice == "q")
                 {
@@ -143,7 +140,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplayOrders(_baseRepository);
-                var orderToDelete = ChooseEntityByID(_baseRepository);
+                var chosenDishId = CheckIfEntityExistsByID(_baseRepository);
+                var orderToDelete = _baseRepository.GetById(chosenDishId);
                 ordersToDelete.Add(orderToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another order to delete list");
@@ -282,7 +280,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         private void DisplayOrdersBelowValue()
         {
             Console.WriteLine("Enter maximal value");
-            var maximalValue = Decimal.Parse(Console.ReadLine());
+            var maximalValue = decimal.Parse(Console.ReadLine());
             var orders = _orderProvider.OrdersBelowValue(maximalValue);
             foreach (var order in orders)
             {
@@ -293,7 +291,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         private void DisplayOrdersAboveValue()
         {
             Console.WriteLine("Enter minimal value");
-            var minimalValue = Decimal.Parse(Console.ReadLine());
+            var minimalValue = decimal.Parse(Console.ReadLine());
             var orders = _orderProvider.OrdersAboveValue(minimalValue);
             foreach (var order in orders)
             {
@@ -322,7 +320,8 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         private void DisplayOrderInfo()
         {
-            var chosenOrder = ChooseEntityByID(_baseRepository);
+            var chosenOrderId = CheckIfEntityExistsByID(_baseRepository);
+            var chosenOrder = _baseRepository.GetById(chosenOrderId);
             Console.WriteLine(chosenOrder.ToString());
             Console.WriteLine(_orderProvider.GetOrderValue(chosenOrder.Id));
         }
@@ -336,7 +335,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             {
 
                 DisplayOrders(_baseRepository);
-                var chosenEntity = ChooseEntityByID(_baseRepository);
+                var chosenOrderId = CheckIfEntityExistsByID(_baseRepository);
+                var chosenOrder = _baseRepository.GetById(chosenOrderId);
                 Console.WriteLine();
                 Console.WriteLine("What data do you wish to modify?");
                 Console.WriteLine("1 - Employee handling the order");
@@ -356,15 +356,15 @@ namespace RestaurantApp.Components.UI.EntityUI
                     switch (updateOrderChoice)
                     {
                         case "1":
-                            UpdateOrderEmployeeID(chosenEntity);
+                            UpdateOrderEmployeeID(chosenOrder);
                             break;
                         case "2":
-                            UpdateOrderStatus(chosenEntity);
+                            UpdateOrderStatus(chosenOrder);
                             break;
                         default:
                             break;
                     }
-                    _baseRepository.Update(chosenEntity);
+                    _baseRepository.Update(chosenOrder);
                 }
             }
         }
