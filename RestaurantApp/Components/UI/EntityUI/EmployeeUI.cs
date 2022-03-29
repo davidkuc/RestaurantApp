@@ -221,12 +221,14 @@ namespace RestaurantApp.Components.UI.EntityUI
                             break;
                         case "3":
                             Console.WriteLine("Enter new employee role");
-                            var newRole = Console.ReadLine();
-                            chosenEmployee.Role = newRole;
+                            DisplayEmployeeRoles();
+                            var newRoleId = int.Parse(Console.ReadLine());
+                            chosenEmployee.Role = Enum.GetName(typeof(EmployeeRole), newRoleId);
                             break;
                         default:
                             break;
                     }
+
                     _baseRepository.Update(chosenEmployee);
                 }
             }
