@@ -53,7 +53,8 @@ public class Application : IApplication
         context.Supplies.Find(2),
         context.Supplies.Find(5),
         context.Supplies.Find(9),
-        }
+        },
+            Price = 15.0m
         });
         dishesRepo.Add(new Dish
         {
@@ -64,7 +65,8 @@ public class Application : IApplication
         context.Supplies.Find(6),
         context.Supplies.Find(7),
         context.Supplies.Find(10),
-        }
+        },
+            Price = 12.0m
         });
         dishesRepo.Add(new Dish
         {
@@ -76,7 +78,8 @@ public class Application : IApplication
         context.Supplies.Find(9),
         context.Supplies.Find(10),
         context.Supplies.Find(11)
-        }
+        },
+            Price = 11.0m
         });
         dishesRepo.Add(new Dish
         {
@@ -87,7 +90,8 @@ public class Application : IApplication
         context.Supplies.Find(8),
         context.Supplies.Find(9),
         context.Supplies.Find(10)
-        }
+        },
+            Price = 17.0m
         });
         dishesRepo.Add(new Dish
         {
@@ -99,7 +103,8 @@ public class Application : IApplication
         context.Supplies.Find(7),
         context.Supplies.Find(8),
          context.Supplies.Find(9)
-        }
+        },
+            Price = 20.0m
         });
         context.SaveChanges();
     }
