@@ -218,7 +218,7 @@ namespace RestaurantApp.Components.UI.EntityUI
         {
             Console.WriteLine("Enter supply category ID");
             DisplaySupplyCategories();
-            var supplyCategoryNumber = Int32.Parse(Console.ReadLine());
+            var supplyCategoryNumber = int.Parse(Console.ReadLine());
             var newSupplyCategory = Enum.GetName(typeof(SupplyCategory), supplyCategoryNumber);
             chosenSupplier.SupplyCategory = newSupplyCategory;
         }

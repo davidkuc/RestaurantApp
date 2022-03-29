@@ -179,33 +179,6 @@ namespace RestaurantApp.Components.UI.EntityUI
             return dt;
         }
 
-        protected static T ChooseEntityByID<T>(IRepository<T> repository)
-            where T : class, IEntity
-        {
-            Console.WriteLine("Choose entity by Id");
-            Console.WriteLine("q - exit");
-            Console.WriteLine();
-            try
-            {
-                var entityID = Console.ReadLine();
-                Console.WriteLine();
-                Console.WriteLine("q - exit");
-                if (entityID == "q")
-                {
-                    return null;
-                }
-                var chosenEntity = repository.GetById(int.Parse(entityID));
-                return chosenEntity;
-            }
-            catch (FormatException)
-            {
-
-                Console.WriteLine("Invalid input - try again");
-            }
-
-            return null;
-        }
-
         protected int CheckIfEntityExistsByID<T>(IRepository<T> repository)
             where T : class, IEntity
         {

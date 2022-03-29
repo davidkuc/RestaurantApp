@@ -73,7 +73,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplayEmployees(_baseRepository);
-                var employeeToDelete = ChooseEntityByID(_baseRepository);
+                var chosenEmployeeId = CheckIfEntityExistsByID(_baseRepository);
+                var employeeToDelete = _baseRepository.GetById(chosenEmployeeId);
                 employeesToDelete.Add(employeeToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another employee to delete list");
@@ -179,7 +180,8 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         private void DisplayEmployeeInfo()
         {
-            var chosenEmployee = ChooseEntityByID(_baseRepository);
+            var chosenEmployeeId = CheckIfEntityExistsByID(_baseRepository);
+            var chosenEmployee = _baseRepository.GetById(chosenEmployeeId);
             Console.WriteLine(chosenEmployee.ToString());
         }
 
@@ -191,7 +193,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplayEmployees(_baseRepository);
-                var chosenEmployee = ChooseEntityByID(_baseRepository);
+                var chosenEmployeeId = CheckIfEntityExistsByID(_baseRepository);
+                var chosenEmployee = _baseRepository.GetById(chosenEmployeeId);
                 Console.WriteLine();
                 Console.WriteLine("What data do you wish to modify?");
                 Console.WriteLine("1 - First name");

@@ -61,7 +61,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             Console.WriteLine("Enter ingredients");
             while (true)
             {
-                var chosenIngredient = ChooseEntityByID(_supplyRepository);
+                var chosenSupplyId = CheckIfEntityExistsByID(_supplyRepository);
+                var chosenIngredient = _supplyRepository.GetById(chosenSupplyId);
                 ingredientCollection.Add(chosenIngredient);
 
                 Console.WriteLine("1 - Add more ingredients");
@@ -113,7 +114,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplayDishes(_baseRepository);
-                var dishToDelete = ChooseEntityByID(_baseRepository);
+                var chosenDishId = CheckIfEntityExistsByID(_baseRepository);
+                var dishToDelete = _baseRepository.GetById(chosenDishId);
                 dishesToDelete.Add(dishToDelete);
                 Console.WriteLine();
                 Console.WriteLine("1 - Add another dish to delete list");
@@ -187,7 +189,8 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         private void DisplayDishIngredients()
         {
-            var chosenDish = ChooseEntityByID(_baseRepository);
+            var chosenDishId = CheckIfEntityExistsByID(_baseRepository);
+            var chosenDish = _baseRepository.GetById(chosenDishId);
             var dishIngredients = _provider.GetDishIngredients(chosenDish);
             foreach (var dish in dishIngredients)
             {
@@ -239,7 +242,8 @@ namespace RestaurantApp.Components.UI.EntityUI
 
         private void DisplayDishInfo()
         {
-            var chosenDish = ChooseEntityByID(_baseRepository);
+            var chosenDishId = CheckIfEntityExistsByID(_baseRepository);
+            var chosenDish = _baseRepository.GetById(chosenDishId);
             Console.WriteLine(chosenDish.ToString());
         }
 
@@ -251,7 +255,8 @@ namespace RestaurantApp.Components.UI.EntityUI
             while (true)
             {
                 DisplayDishes(_baseRepository);
-                var chosenDish = ChooseEntityByID(_baseRepository);
+                var chosenDishId = CheckIfEntityExistsByID(_baseRepository);
+                var chosenDish = _baseRepository.GetById(chosenDishId);
                 Console.WriteLine();
                 Console.WriteLine("What data do you wish to modify?");
                 Console.WriteLine("1 - Name");
