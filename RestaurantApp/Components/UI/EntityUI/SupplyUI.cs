@@ -51,6 +51,7 @@ namespace RestaurantApp.Components.UI.EntityUI
                     Console.WriteLine("Enter supply name");
                     var supplyName = Console.ReadLine();
                     Console.WriteLine("Enter supply category");
+                    DisplaySupplyCategories();
                     var category = ValidateSupplyCategory(Console.ReadLine());
                     Console.WriteLine("Enter quantity");
                     var quantity = int.Parse(Console.ReadLine());

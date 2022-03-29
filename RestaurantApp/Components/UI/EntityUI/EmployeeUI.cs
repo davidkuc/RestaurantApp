@@ -244,13 +244,13 @@ namespace RestaurantApp.Components.UI.EntityUI
             try
             {
                 enumId = int.Parse(enumIdStr);
-                if (enumId > enumCount || enumId < enumCount)
+                if (enumId > enumCount || enumId < 0)
                 {
                     Console.WriteLine("Invalid enum ID - try again");
                     while (true)
                     {
                         enumId = int.Parse(Console.ReadLine());
-                        if (!(enumId > enumCount && enumId < enumCount))
+                        if (!(enumId > enumCount || enumId < 0))
                         {
                             break;
                         }
